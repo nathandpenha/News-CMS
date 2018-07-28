@@ -1,5 +1,9 @@
 <?php
-include("includes/base.php");
+if (file_exists("includes/base.php")){
+	include("includes/base.php");
+}else{
+	header('Location: ../na-install.php');
+}
 
 $query = "Select * from categories";
 $categories = $db->query($query);

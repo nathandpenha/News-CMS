@@ -1,6 +1,6 @@
 <?php
 if (file_exists("includes/base.php")){
-	echo "Installed Script";
+	header('Location: index.php');
 }else{
 	?>
 	<!DOCTYPE html>
