@@ -1,12 +1,12 @@
 <?php
-header("Access-Control-Allow-Origin: http://localhost/");
+header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 include '../includes/base.php';
 
 global $db;
 
-$query = "SELECT * FROM `posts` where featured = 0 ORDER BY `date_created` DESC LIMIT 0,10";
+$query = "SELECT * FROM ".DB_PREFIX."posts where featured = 0 ORDER BY `date_created` DESC LIMIT 0,10";
 
 $featured = $db->query($query);
 

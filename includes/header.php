@@ -4,19 +4,18 @@ if (file_exists("includes/base.php")){
 }else{
 	header('Location: ../na-install.php');
 }
-
-$query = "Select * from categories";
+$query = "Select * from ".DB_PREFIX."categories";
 $categories = $db->query($query);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta name="description" content="<?=$siteDescription;?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" href="../../favicon.ico">
 
-	<title>New For You By You</title>
+	<title><?=$siteName;?></title>
 	<script src="js/bootstrap.js" ></script>
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap.css" rel="stylesheet">

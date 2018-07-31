@@ -31,35 +31,37 @@ if (mysqli_connect_errno()){
 		define("DB_USER","'.$getDBUserName.'");
 		define("DB_PASS","'.$getPassword.'");
 		define("DB_NAME","'.$getDBName.'");
+		define("DB_PREFIX", "'.$getPrefix.'");
 		$db = new mysqli(DB_HOST , DB_USER , DB_PASS, DB_NAME);
 		';
 		fwrite($handle, $data);
 		fclose($handle);
 		//create table
-		$tables = array("CREATE TABLE ".$getPrefix."reviewers (`id` int(11) NOT NULL AUTO_INCREMENT,`first_name` varchar(60) NOT NULL,`last_name` varchar(60) NOT NULL,`email` varchar(100) NOT NULL,`password` varchar(255) NOT NULL, PRIMARY KEY (id))",
-		"CREATE TABLE ".$getPrefix."categories (`id` int(11) NOT NULL AUTO_INCREMENT,`category_name` varchar(50), PRIMARY KEY (id))",
-		"CREATE TABLE ".$getPrefix."comments (`id` int(11) NOT NULL AUTO_INCREMENT,`post_id` int(11) NOT NULL,`user_id` int(11) NOT NULL,`message` text NOT NULL,`date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id))",
-		"CREATE TABLE ".$getPrefix."comment_votes (`id` int(11) NOT NULL AUTO_INCREMENT,`comment_id` int(11) NOT NULL,`user_id` int(11) NOT NULL,`direction` tinyint(1) NOT NULL, PRIMARY KEY (id))",
-		"CREATE TABLE ".$getPrefix."keywords (`id` int(11) NOT NULL AUTO_INCREMENT,`post_id` int(11) NOT NULL,`tag` varchar(255) NOT NULL, PRIMARY KEY (id))",
-		"CREATE TABLE ".$getPrefix."posts (`id` int(11) NOT NULL AUTO_INCREMENT,`title` varchar(200) DEFAULT NULL,`category` int(11) DEFAULT NULL,`date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,`body` longtext,`reviewer` varchar(100) DEFAULT '0',`featured` tinyint(1) NOT NULL, PRIMARY KEY (id)) ",
-		"CREATE TABLE ".$getPrefix."users (`id` int(11) NOT NULL AUTO_INCREMENT,`first_name` varchar(60) NOT NULL,`last_name` varchar(60) NOT NULL,`email` varchar(100) NOT NULL,`password` varchar(255) NOT NULL, PRIMARY KEY (id)) "
-	);
-	for($i=0; $i<sizeof($tables); ++$i){
-		$con->query($tables[$i]);
+		$tables = array(
+			"CREATE TABLE ".$getPrefix."site_meta (`id` int(11) NOT NULL AUTO_INCREMENT, `meta_name` varchar(255), `meta_value` varchar(255), PRIMARY KEY(id) )",
+			"CREATE TABLE ".$getPrefix."categories (`id` int(11) NOT NULL AUTO_INCREMENT,`category_name` varchar(50), PRIMARY KEY (id))",
+			"CREATE TABLE ".$getPrefix."comments (`id` int(11) NOT NULL AUTO_INCREMENT,`post_id` int(11) NOT NULL,`user_id` int(11) NOT NULL,`message` text NOT NULL,`date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id))",
+			"CREATE TABLE ".$getPrefix."comment_votes (`id` int(11) NOT NULL AUTO_INCREMENT,`comment_id` int(11) NOT NULL,`user_id` int(11) NOT NULL,`direction` tinyint(1) NOT NULL, PRIMARY KEY (id))",
+			"CREATE TABLE ".$getPrefix."keywords (`id` int(11) NOT NULL AUTO_INCREMENT,`post_id` int(11) NOT NULL,`tag` varchar(255) NOT NULL, PRIMARY KEY (id))",
+			"CREATE TABLE ".$getPrefix."posts (`id` int(11) NOT NULL AUTO_INCREMENT,`title` varchar(200) DEFAULT NULL,`category` int(11) DEFAULT NULL,`date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,`body` longtext,`reviewer` varchar(100) DEFAULT '0',`featured` tinyint(1) NOT NULL, PRIMARY KEY (id)) ",
+			"CREATE TABLE ".$getPrefix."users (`id` int(11) NOT NULL AUTO_INCREMENT,`first_name` varchar(60) NOT NULL,`last_name` varchar(60) NOT NULL,`email` varchar(100) NOT NULL,`password` varchar(255) NOT NULL, `reviewer` varchar(10), PRIMARY KEY (id)) "
+		);
+		for($i=0; $i<sizeof($tables); ++$i){
+			$con->query($tables[$i]);
+		}
+		?>
+		<script type="text/javascript">
+		location.href = "../na-install.php?suc=install";
+		</script>
+		<?php
+	}catch(Exception $e){
+		error_log($e); // debug
+		?>
+		<script type="text/javascript">
+		location.href =  "../na-install.php?err=fail";
+		</script>
+		<?php
 	}
-	?>
-	<script type="text/javascript">
-	location.href = "../na-install.php?suc=install";
-	</script>
-<?php
-}catch(Exception $e){
-	error_log($e); // debug
-	?>
-	<script type="text/javascript">
-	location.href =  "../na-install.php?err=fail";
-	</script>
-	<?php
-}
 }
 
 ?>
