@@ -133,6 +133,10 @@ h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 0;
 }
 
+.blog-footer div{
+	text-align: center;
+}
+
 .hover-shadow:hover{
 	box-shadow: 0 4px 30px #bdbdbd;
 	margin-top: -5px;

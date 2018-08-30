@@ -4,7 +4,6 @@ include("includes/header.php");
 <div class="row mb-2" id="featured_post">
 	<!-- Ajax will load data -->
 </div>
-
 <main role="main" class="container">
 	<div class="row">
 		<div class="col-md-8 blog-main">

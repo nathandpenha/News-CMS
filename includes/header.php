@@ -29,7 +29,7 @@ $categories = $db->query($query);
 	<div class="container">
 		<header class="blog-header py-3">
 			<div class="col-12 text-center">
-				<a class="blog-header-logo text-dark" href="index.php">News on the Go</a>
+				<a class="blog-header-logo text-dark" href="index.php"><?=$siteName;?></a>
 				<br>
 				<small>
 					<?php

@@ -27,7 +27,7 @@
 									<input type="text" name="first_name" class="form-control" placeholder="First Name" required>
 								</div>
 								<div class="col-md-6 offset-md-3 pt-3">
-									<label for="last_name" class="sr-only"></label>
+									<label for="last_name" class="sr-only">Last Name</label>
 									<input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
 								</div>
 								<div class="col-md-6 offset-md-3 pt-3">
@@ -77,7 +77,7 @@
 							</div>
 							<div class="col-md-6 offset-md-3 pt-3">
 								<label for="db_prefix" class="sr-only">Table Prefix</label>
-								<input type="text" name="db_prefix" id="db_prefix" class="form-control" placeholder="Table Prefix (Default : na_)" required>
+								<input type="text" name="db_prefix" id="db_prefix" class="form-control" value="na" placeholder="Table Prefix (Default : na_)" required>
 							</div>
 							<div class="col-md-6 offset-md-3 pt-3">
 								<button class="btn btn-primary" type="submit" name="db_btn">Continue</button>

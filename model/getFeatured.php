@@ -6,14 +6,14 @@ include '../includes/base.php';
 
 global $db;
 
-$query = "SELECT * FROM ".DB_PREFIX."posts where featured = 1 ORDER BY `date_created` DESC LIMIT 0,3";
+$query = "SELECT * FROM ".DB_PREFIX."posts where `featured` = 1 and `post_type` = 'post' ORDER BY `date_created` DESC LIMIT 0,3";
 
 $featured = $db->query($query);
 
 $ret = array();
 
 while($row = $featured->fetch_assoc()){
-	$queryCategory = $db->query("SELECT * from `categories` where id = ". $row['category']);
+	$queryCategory = $db->query("SELECT * from ".DB_PREFIX."categories where id = ". $row['category']);
 	$category = $queryCategory->fetch_assoc();
 	$data = array();
 	$data['title'] = $row['title'];

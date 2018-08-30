@@ -13,14 +13,16 @@ $getWebSiteDescription = mysqli_real_escape_string($db, strip_tags(trim($_POST['
 
 //setup admin
 try{
+	$userSql = "INSERT INTO ".DB_PREFIX."users (`first_name`, `last_name`, `email`, `password`, `reviewer`) VALUES ('".$getFirstName."', '".$getLastName."',
+	'".$getEmail."', md5(".$getPassword."), 1)";
+	$db->query($userSql);
 	$sql = "INSERT INTO ".DB_PREFIX."site_meta(`meta_name`, `meta_value`) VALUES ('AdminFName','".$getFirstName."'), ('AdminLName','".$getLastName."'),
-	('AdminEmail','".$getEmail."'), ('AdminPassword',md5(".$getPassword.")), ('WebSiteName','".$getWebSiteName."'),
-	('WebSiteDescription','".$getWebSiteDescription."')";
+	('AdminEmail','".$getEmail."'), ('WebSiteName','".$getWebSiteName."'),('WebSiteDescription','".$getWebSiteDescription."')";
 	$db->query($sql);
 	$handle = fopen("../includes/base.php", 'a');
 	$data = '
-	$siteName = $db->query("SELECT meta_value FROM weed_site_meta WHERE `meta_name` = \'WebSiteName\'")->fetch_assoc()[\'meta_value\'];
-	$siteDescription = $db->query("SELECT meta_value FROM weed_site_meta WHERE `meta_name` = \'WebSiteDescription\'")->fetch_assoc()[\'meta_value\'];
+	$siteName = $db->query("SELECT meta_value FROM ".DB_PREFIX."site_meta WHERE `meta_name` = \'WebSiteName\'")->fetch_assoc()[\'meta_value\'];
+	$siteDescription = $db->query("SELECT meta_value FROM ".DB_PREFIX."site_meta WHERE `meta_name` = \'WebSiteDescription\'")->fetch_assoc()[\'meta_value\'];
 	';
 	fwrite($handle, $data);
 	fclose($handle);
