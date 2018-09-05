@@ -12,7 +12,7 @@
 			</ol>
 		</div>
 		<div class="col-md-4">
-			<a href="#">Back to top</a>
+			
 		</div>
 	</div>
 	<p>

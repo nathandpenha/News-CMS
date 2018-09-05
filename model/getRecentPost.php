@@ -6,7 +6,7 @@ include '../includes/base.php';
 
 global $db;
 
-$query = "SELECT * FROM ".DB_PREFIX."posts where featured = 0 ORDER BY `date_created` DESC LIMIT 0,10";
+$query = "SELECT * FROM ".DB_PREFIX."posts where featured = 0 and reviewer = 1 ORDER BY `date_created` DESC LIMIT 0,10";
 
 $featured = $db->query($query);
 

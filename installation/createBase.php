@@ -43,7 +43,7 @@ if (mysqli_connect_errno()){
 			"CREATE TABLE ".$getPrefix."comments (`id` int(11) NOT NULL AUTO_INCREMENT,`post_id` int(11) NOT NULL,`user_id` int(11) NOT NULL,`message` text NOT NULL,`date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id))",
 			"CREATE TABLE ".$getPrefix."comment_votes (`id` int(11) NOT NULL AUTO_INCREMENT,`comment_id` int(11) NOT NULL,`user_id` int(11) NOT NULL,`direction` tinyint(1) NOT NULL, PRIMARY KEY (id))",
 			"CREATE TABLE ".$getPrefix."keywords (`id` int(11) NOT NULL AUTO_INCREMENT,`post_id` int(11) NOT NULL,`tag` varchar(255) NOT NULL, PRIMARY KEY (id))",
-			"CREATE TABLE ".$getPrefix."users (`id` int(11) NOT NULL AUTO_INCREMENT,`first_name` varchar(60) NOT NULL,`last_name` varchar(60) NOT NULL,`email` varchar(100) NOT NULL,`password` varchar(255) NOT NULL, `reviewer` varchar(10), PRIMARY KEY (id)) "
+			"CREATE TABLE ".$getPrefix."users (`id` int(11) NOT NULL AUTO_INCREMENT,`first_name` varchar(60) NOT NULL,`last_name` varchar(60) NOT NULL,`email` varchar(100) NOT NULL,`password` varchar(255) NOT NULL, `admin` int not null default 1, PRIMARY KEY (id)) "
 		);
 		for($i=0; $i<sizeof($tables); ++$i){
 			$con->query($tables[$i]);
