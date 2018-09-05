@@ -61,15 +61,15 @@
 							<h4 class="modal-title" id="myModalLabel2">Enter Category Details</h4>
 						</div>
 						<div class="modal-body">
-							<h4>Text in a modal</h4>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-							<p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+							<label>Enter Category Name : </label>
+							<br>
+							<input type="text" class="form-control" id="newCatVal" required pattern="[a-zA-Z]*">
+							<br>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save changes</button>
+							<input type="button" id="addNewCat" value="Submit!" class="btn btn-primary">
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -80,6 +80,7 @@
 			<script src="vendors/datatables.net-bs/js/dataTables.bootstrap.js" charset="utf-8"></script>
 			<script type="text/javascript">
 			$(document).ready(function() {
+				var table = $('#catTable').DataTable();
 				$.ajax({
 					url: 'lib/na_category.php',
 					type: 'post',
@@ -87,13 +88,11 @@
 						mode: 'list'
 					},
 					success: function(success){
-						console.log(success);
-						var table = $('#catTable').DataTable();
 						for (i = 0 ; i<success.length ; ++i){
 							<?php
 							if ($_SESSION['admin']){
 								?>
-								var button = "<button id='delCat' value='"success[i].id"' class="btn btn-danger">Delete</button>";
+								var button = "<button value='"+success[i].id+"' class='btn btn-danger delCat'><i class='fa fa-trash'></i> Delete</button>";
 								table.row.add([i+1, success[i].category_name, success[i].count.ans ,button]).draw(false);
 								<?php
 							}else{
@@ -104,6 +103,42 @@
 							?>
 						}
 					}
+				});
+				$("#addNewCat").on('click', function(){
+					$.ajax({
+						url: 'lib/na_category.php',
+						type: 'POST',
+						data: {
+							mode: 'add',
+							val : $("#newCatVal").val()
+						},
+						success: function(success){
+							if(success.message == "success"){
+								alert("New Category Added!");
+								location.reload();
+							}else{
+								alert("Some Error Occured! Please Try Again!\n"+success.message);
+							}
+						}
+					});
+				});
+				$(document).on('click', '.delCat',function(){
+					$.ajax({
+						url: 'lib/na_category.php',
+						type: 'POST',
+						data: {
+							mode: 'del',
+							val : $(this).val()
+						},
+						success: function(success){
+							if(success.message == "success"){
+								alert("New Category Added!");
+								location.reload();
+							}else{
+								alert("Some Error Occured! Please Try Again!\n"+success.message);
+							}
+						}
+					});
 				});
 			});
 			</script>
