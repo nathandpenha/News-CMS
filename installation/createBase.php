@@ -7,7 +7,7 @@ $getPassword = strip_tags(trim($_POST['db_password']));
 $getPrefix = strip_tags(trim($_POST['db_prefix']))."_";
 
 $checkDirectoryExists = "../includes/";
-
+echo $getDBHostName,$getDBUserName,$getPassword,$getDBName;
 //check mysql connection before running script
 $con = mysqli_connect($getDBHostName,$getDBUserName,$getPassword,$getDBName);
 // Check connection
@@ -15,7 +15,7 @@ if (mysqli_connect_errno()){
 	error_log("Failed to connect to DB");
 	?>
 	<script type="text/javascript">
-	location.href="../na-install.php?err=dbConnectFail";
+	//location.href="../na-install.php?err=dbConnectFail";
 	</script>
 	<?php
 }else{
