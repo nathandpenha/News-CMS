@@ -9,10 +9,10 @@
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>All Categories</h3>
+							<h3>All Tags</h3>
 						</div>
 					</div>
-					<button class="btn btn-success pull-right" data-toggle="modal" data-target=".addCatModal"><i class="fa fa-plus"></i> Add New Cateogry</i></button>
+					<button class="btn btn-success pull-right" data-toggle="modal" data-target=".addTagModal"><i class="fa fa-plus"></i> Add New Tags</i></button>
 					<div class="clearfix"></div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
@@ -22,7 +22,7 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="x_content">
-									<table class="table table-striped" id="catTable">
+									<table class="table table-striped" id="tagTable">
 										<thead>
 											<tr>
 												<th>#</th>
@@ -51,24 +51,24 @@
 				</div>
 			</div>
 			<!-- Small modal -->
-			<div class="modal fade addCatModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade addTagModal" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
 
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel2">Enter Category Details</h4>
+							<h4 class="modal-title" id="myModalLabel2">Enter Tag Details</h4>
 						</div>
 						<div class="modal-body">
-							<label>Enter Category Name : </label>
+							<label>Enter Tag Name : </label>
 							<br>
-							<input type="text" class="form-control" id="newCatVal" required pattern="[a-zA-Z]*">
+							<input type="text" class="form-control" id="newTagVal" required pattern="[a-zA-Z]*">
 							<br>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<input type="button" id="addNewCat" value="Submit!" class="btn btn-primary">
+							<input type="button" id="addNewTag" value="Submit!" class="btn btn-primary">
 						</div>
 					</div>
 				</div>
@@ -80,41 +80,42 @@
 			<script src="vendors/datatables.net-bs/js/dataTables.bootstrap.js" charset="utf-8"></script>
 			<script type="text/javascript">
 			$(document).ready(function() {
-				var table = $('#catTable').DataTable();
+				var table = $('#tagTable').DataTable();
 				$.ajax({
-					url: 'lib/na_category.php',
+					url: 'lib/na_tags.php',
 					type: 'post',
 					data: {
 						mode: 'list'
 					},
 					success: function(success){
+						console.log(success);
 						for (i = 0 ; i<success.length ; ++i){
 							<?php
 							if ($_SESSION['admin']){
 								?>
-								var button = "<button value='"+success[i].id+"' class='btn btn-danger delCat'><i class='fa fa-trash'></i> Delete</button>";
-								table.row.add([i+1, success[i].category_name, success[i].count.ans ,button]).draw(false);
+								var button = "<button value='"+success[i].id+"' class='btn btn-danger delTag'><i class='fa fa-trash'></i> Delete</button>";
+								table.row.add([i+1, "#"+success[i].tag_name, success[i].count.ans ,button]).draw(false);
 								<?php
 							}else{
 								?>
-								table.row.add([i+1, success[i].category_name, success[i].count.ans]).draw(false);
+								table.row.add([i+1, success[i].tag_name, success[i].count.ans]).draw(false);
 								<?php
 							}
 							?>
 						}
 					}
 				});
-				$("#addNewCat").on('click', function(){
+				$("#addNewTag").on('click', function(){
 					$.ajax({
-						url: 'lib/na_category.php',
+						url: 'lib/na_tags.php',
 						type: 'POST',
 						data: {
 							mode: 'add',
-							val : $("#newCatVal").val()
+							val : $("#newTagVal").val()
 						},
 						success: function(success){
 							if(success.message == "success"){
-								alert("New Category Added!");
+								alert("New Tag Added!");
 								location.reload();
 							}else{
 								alert("Some Error Occured! Please Try Again!\n"+success.message);
@@ -122,9 +123,9 @@
 						}
 					});
 				});
-				$(document).on('click', '.delCat',function(){
+				$(document).on('click', '.delTag',function(){
 					$.ajax({
-						url: 'lib/na_category.php',
+						url: 'lib/na_tags.php',
 						type: 'POST',
 						data: {
 							mode: 'del',
@@ -132,7 +133,7 @@
 						},
 						success: function(success){
 							if(success.message == "success"){
-								alert("Category Deleted!");
+								alert("Tag Deleted");
 								location.reload();
 							}else{
 								alert("Some Error Occured! Please Try Again!\n"+success.message);
