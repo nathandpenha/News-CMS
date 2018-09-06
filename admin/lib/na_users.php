@@ -18,11 +18,23 @@ if($getMode == "list"){
 }else if ($getMode == "del"){
 	$getUserId = mysqli_real_escape_string($db, strip_tags(trim($_POST['val'])));
 	$ret = array();
-	$delCategorySQL = $db->prepare("DELETE FROM ".DB_PREFIX."tags where id = ?");
-	$delCategorySQL->bind_param("i", $getUserId);
-	$delCategorySQL->execute();
-	if ($delCategorySQL){
-		$deletePostUsers = $db->query("DELETE FROM ".DB_PREFIX."post_tags where tag_id = ".$getUserId);
+	$delSQL = $db->prepare("DELETE FROM ".DB_PREFIX."users where id = ?");
+	$delSQL->bind_param("i", $getUserId);
+	$delSQL->execute();
+	if ($delSQL){
+		$ret['message'] = "success";
+	}else{
+		$ret['message'] = "failed";
+	}
+	echo json_encode($ret);
+}else if($getMode == "change"){
+	$getUserId = mysqli_real_escape_string($db, strip_tags(trim($_POST['uid'])));
+	$getNewRole = mysqli_real_escape_string($db, strip_tags(trim($_POST['role'])));
+	$ret = array();
+	$roleSQL = $db->prepare("UPDATE ".DB_PREFIX."users SET role = ? WHERE id = ?");
+	$roleSQL->bind_param("ss", $getNewRole, $getUserId);
+	$roleSQL->execute();
+	if ($roleSQL){
 		$ret['message'] = "success";
 	}else{
 		$ret['message'] = "failed";

@@ -48,6 +48,34 @@
 					</div>
 				</div>
 			</div>
+			<!-- Small modal -->
+			<div class="modal fade roleUser" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel2">Select New Role</h4>
+						</div>
+						<div class="modal-body">
+							<input type="hidden" id="getUID" value="">
+							<label>Role : </label>
+							<br>
+							<select id="newRole" class="form-control">
+								<option value="1">User</option>
+								<option value="2">Editor</option>
+								<option value="3">Admin</option>
+							</select>
+							<br>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<input type="button" id="changeRole" value="Submit!" class="btn btn-primary">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /modals -->
 			<!-- /page content -->
 			<?php include('includes/footer.php'); ?>
 			<script src="vendors/datatables.net/js/jquery.dataTables.js" charset="utf-8"></script>
@@ -64,7 +92,8 @@
 					success: function(success){
 						console.log(success);
 						for (i = 0 ; i<success.length ; ++i){
-							var button = "<button value='"+success[i].id+"' class='btn btn-danger delTag'><i class='fa fa-trash'></i> Delete</button>";
+							var button = "<button value='"+success[i].id+"' class='btn btn-danger delUser'><i class='fa fa-trash'></i> Delete</button>";
+							button += "<button data-id='"+success[i].id+"' class='btn btn-warning openChange' data-toggle='modal' data-target='.roleUser'><i class='fa fa-random'></i> Change Role</button>";
 							var getRole = success[i].role;
 							if (getRole == 1){
 								var role = "User";
@@ -77,23 +106,48 @@
 						}
 					}
 				});
-				$(document).on('click', '.delTag',function(){
+				$(document).on("click", ".openChange", function () {
+					var uID = $(this).data('id');
+					$(".modal-body #getUID").val( uID );
+				});
+				$(document).on('click', '#changeRole', function(){
 					$.ajax({
 						url: 'lib/na_users.php',
 						type: 'POST',
 						data: {
-							mode: 'del',
-							val : $(this).val()
+							mode: 'change',
+							uid : $("#getUID").val(),
+							role : $("#newRole").val()
 						},
 						success: function(success){
 							if(success.message == "success"){
-								alert("Tag Deleted");
+								alert("User Role Changed");
 								location.reload();
 							}else{
 								alert("Some Error Occured! Please Try Again!\n"+success.message);
 							}
 						}
 					});
+				});
+				$(document).on('click', '.delUser',function(){
+					if(confirm("Are You Sure You Want To Delete ?")){
+						$.ajax({
+							url: 'lib/na_users.php',
+							type: 'POST',
+							data: {
+								mode: 'del',
+								val : $(this).val()
+							},
+							success: function(success){
+								if(success.message == "success"){
+									alert("User Deleted");
+									location.reload();
+								}else{
+									alert("Some Error Occured! Please Try Again!\n"+success.message);
+								}
+							}
+						});
+					}
 				});
 			});
 			</script>

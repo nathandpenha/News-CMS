@@ -94,7 +94,7 @@
 							if ($_SESSION['admin']){
 								?>
 								var button = "<button value='"+success[i].id+"' class='btn btn-danger delTag'><i class='fa fa-trash'></i> Delete</button>";
-								table.row.add([i+1, success[i].tag_name, success[i].count.ans ,button]).draw(false);
+								table.row.add([i+1, "#"+success[i].tag_name, success[i].count.ans ,button]).draw(false);
 								<?php
 							}else{
 								?>
