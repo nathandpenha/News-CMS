@@ -36,7 +36,7 @@
 								</div>
 								<div class="col-md-6 offset-md-3 pt-3">
 									<label for="password" class="sr-only">Password</label>
-									<input type="password" name="password" class="form-control" placeholder="Password" required>
+									<input type="password" name="password" class="form-control" placeholder="Password" >
 								</div>
 								<hr>
 								<div class="col-md-6 offset-md-3 pt-1">
@@ -73,7 +73,7 @@
 							</div>
 							<div class="col-md-6 offset-md-3 pt-3">
 								<label for="db_password" class="sr-only">Database Password</label>
-								<input placeholder="Database Password" type="password" name="db_password" id="db_password" class="form-control" required>
+								<input placeholder="Database Password" type="password" name="db_password" id="db_password" class="form-control" >
 							</div>
 							<div class="col-md-6 offset-md-3 pt-3">
 								<label for="db_prefix" class="sr-only">Table Prefix</label>
