@@ -12,29 +12,9 @@ if($getMode == "list"){
 	$users = $db->query("SELECT * FROM ".DB_PREFIX."users");
 	$ret = array();
 	while($row = $users->fetch_assoc()){
-		$countUser = $db->query("SELECT COUNT(*) as ans from ".DB_PREFIX."posts where tag_id = ".$row['id']);
-		$count = $countUser->fetch_assoc();
-		$row['count'] = $count;
 		array_push($ret, $row);
 	}
 	echo json_encode($ret);
-}else if ($getMode == "add"){
-	$getNewUser = mysqli_real_escape_string($db, strip_tags(trim($_POST['val'])));
-	$ret = array();
-	if ($getNewUser != ""){
-		$addUserSQL = $db->prepare("INSERT INTO ".DB_PREFIX."tags (`tag_name`) VALUES (?)");
-		$addUserSQL->bind_param("s", $getNewUser);
-		$addUserSQL->execute();
-		if ($addUserSQL){
-			$ret['message'] = "success";
-		}else{
-			$ret['message'] = "failed";
-		}
-		echo json_encode($ret);
-	}else{
-		$ret['message'] = "Please Don't Leave the Field Blank!";
-		echo json_encode($ret);
-	}
 }else if ($getMode == "del"){
 	$getUserId = mysqli_real_escape_string($db, strip_tags(trim($_POST['val'])));
 	$ret = array();

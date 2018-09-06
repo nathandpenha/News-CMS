@@ -48,30 +48,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- Small modal -->
-			<div class="modal fade addUserModal" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-							</button>
-							<h4 class="modal-title" id="myModalLabel2">Enter Tag Details</h4>
-						</div>
-						<div class="modal-body">
-							<label>Enter Tag Name : </label>
-							<br>
-							<input type="text" class="form-control" id="newTagVal" required pattern="[a-zA-Z]*">
-							<br>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<input type="button" id="addNewTag" value="Submit!" class="btn btn-primary">
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /modals -->
 			<!-- /page content -->
 			<?php include('includes/footer.php'); ?>
 			<script src="vendors/datatables.net/js/jquery.dataTables.js" charset="utf-8"></script>
@@ -80,7 +56,7 @@
 			$(document).ready(function() {
 				var table = $('#tagTable').DataTable();
 				$.ajax({
-					url: 'lib/na_tags.php',
+					url: 'lib/na_users.php',
 					type: 'post',
 					data: {
 						mode: 'list'
@@ -88,42 +64,22 @@
 					success: function(success){
 						console.log(success);
 						for (i = 0 ; i<success.length ; ++i){
-							<?php
-							if ($_SESSION['admin']){
-								?>
-								var button = "<button value='"+success[i].id+"' class='btn btn-danger delTag'><i class='fa fa-trash'></i> Delete</button>";
-								table.row.add([i+1, success[i].tag_name, success[i].count.ans ,button]).draw(false);
-								<?php
+							var button = "<button value='"+success[i].id+"' class='btn btn-danger delTag'><i class='fa fa-trash'></i> Delete</button>";
+							var getRole = success[i].role;
+							if (getRole == 1){
+								var role = "User";
+							}else if (getRole == 2){
+								var role = "Editor";
 							}else{
-								?>
-								table.row.add([i+1, success[i].tag_name, success[i].count.ans]).draw(false);
-								<?php
+								var role = "Admin";
 							}
-							?>
+							table.row.add([i+1, success[i].first_name +" "+ success[i].last_name, success[i].email , role, button]).draw(false);
 						}
 					}
 				});
-				$("#addNewTag").on('click', function(){
-					$.ajax({
-						url: 'lib/na_users.php',
-						type: 'POST',
-						data: {
-							mode: 'add',
-							val : $("#newTagVal").val()
-						},
-						success: function(success){
-							if(success.message == "success"){
-								alert("New Tag Added!");
-								location.reload();
-							}else{
-								alert("Some Error Occured! Please Try Again!\n"+success.message);
-							}
-						}
-					});
-				});
 				$(document).on('click', '.delTag',function(){
 					$.ajax({
-						url: 'lib/na_tags.php',
+						url: 'lib/na_users.php',
 						type: 'POST',
 						data: {
 							mode: 'del',
