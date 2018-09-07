@@ -8,7 +8,7 @@ global $db;
 
 
 
-$query = "SELECT * FROM ".DB_PREFIX."posts where `featured` = 1 and `post_type` = 'post' ORDER BY `date_created` DESC LIMIT 0,3";
+$query = "SELECT * FROM ".DB_PREFIX."posts where `featured` = 1 and `post_type` = 'published' ORDER BY `date_created` DESC LIMIT 0,3";
 
 $featured = $db->query($query);
 
