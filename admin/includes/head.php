@@ -26,4 +26,8 @@
 	<link href="build/css/custom.min.css" rel="stylesheet">
 	<!-- jQuery -->
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
+	<link href="vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+	<style>
+	.msg{margin-top: 60px;}
+	</style>
 </head>

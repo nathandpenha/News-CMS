@@ -41,7 +41,6 @@ if(isset($_POST['submit']))
 
 	$query = "insert into  ".DB_PREFIX."users ( 'first_name' , 'last_name' , 'email' , 'password' , 'admin' ) values ($firstName,$lastName,$email,$password,$admin)";
 	if($db->query($query))
-
 	{
 		echo "user added";
 	}else
