@@ -1,29 +1,29 @@
 <?php include('includes/head.php');
 $msg = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$email = $_POST["email"];
-	$password = md5($_POST["password"]);
-	if ($email == '' || $password == '') {
-		$msg = "You must enter all fields";
-	} else {
-		$sql = "SELECT * FROM ".DB_PREFIX."users WHERE email = '$email' AND password = '$password'";
+ $email = $_POST["email"];
+    $password = md5($_POST["password"]);
+	 if ($email == '' || $password == '') {
+        $msg = "You must enter all fields";
+    } else {
+        $sql =$db->prepare( "SELECT * FROM `$DB_PREFIX.users` WHERE email = ? AND password = ?");
+        $sql->bind_param("sss",$email,$password);
 		$query = mysql_query($sql);
 
-		if ($query === false) {
-			echo "Could not successfully run query ($sql) from DB: " . mysql_error();
-			exit;
-		}
+        if ($query === false) {
+            echo "Could not successfully run query ($sql) from DB: " . mysql_error();
+            exit;
+        }
 
-		if (mysql_num_rows($query) > 0) {
+        if (mysql_num_rows($query) > 0) {
+         
+            header('Location: index.php');
+            exit;
+        }
 
-			header('Location: index.php');
-			exit;
-		}
-
-		$msg = "Username and password do not match";
-	}
-}
-?>
+        $msg = "Username and password do not match";
+    }
+	?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
