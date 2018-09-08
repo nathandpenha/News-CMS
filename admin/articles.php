@@ -59,7 +59,11 @@
 				$.ajax({
 					url: 'lib/na_articles.php',
 					type: 'POST',
-					data: {mode: 'list'},
+					data: {
+						mode: 'list',
+						type : '<?=$_SESSION['admin'];?>',
+						uid : '<?=$getUserID;?>'
+					},
 					success: function(data){
 						console.log(data);
 						for (i = 0; i < data.length; ++i){
@@ -67,9 +71,30 @@
 							if (data[i].featured == 1){
 								star = "<i class='fa fa-star'></i> &nbsp;&nbsp;";
 							}
-							console.log(star);
-							table.row.add([star + data[i].title, data[i].author_name, data[i].category_name, data[i].post_type, data[i].date_created, ""]).draw(false);
+							var button = "<button value='"+data[i].id+"' data-toggle='tooltip' data-placement='top' title='Delete' class='btn btn-danger delArt'><i class='fa fa-trash'></i></button>";
+							button += "<a href='edit_article.php?id="+data[i].id+"'><button value='"+data[i].id+"' data-toggle='tooltip' data-placement='top' title='Edit' class='btn btn-primary editArt'><i class='fa fa-pencil'></i></button></a>";
+							table.row.add([star + data[i].title, data[i].author_name, data[i].category_name, data[i].post_type, data[i].date_created, button]).draw(false);
 						}
+					}
+				});
+				$(document).on('click', '.delArt',function(){
+					if (confirm("Are You Sure ?")) {
+						$.ajax({
+							url: 'lib/na_articles.php',
+							type: 'POST',
+							data: {
+								mode: 'del',
+								val : $(this).val()
+							},
+							success: function(success){
+								if(success.message == "success"){
+									alert("Article Deleted!");
+									location.reload();
+								}else{
+									alert("Some Error Occured! Please Try Again!\n"+success.message);
+								}
+							}
+						});
 					}
 				});
 			});

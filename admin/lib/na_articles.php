@@ -9,9 +9,16 @@ global $db;
 $getMode = $_POST['mode'];
 
 if($getMode == "list"){
-	$category = $db->query("SELECT * FROM ".DB_PREFIX."posts order by date_created desc");
+	$getUserType = $_POST['type'];
+	if ($getUserType){
+		$postSQL = "SELECT * FROM ".DB_PREFIX."posts order by date_created desc";
+	}else{
+		$getUserID = $_POST['uid'];
+		$postSQL = "SELECT * FROM ".DB_PREFIX."posts where author = ".$getUserID." order by date_created desc";
+	}
+	$posts = $db->query($postSQL);
 	$ret = array();
-	while($row = $category->fetch_assoc()){
+	while($row = $posts->fetch_assoc()){
 		$authorName = $db->query("SELECT CONCAT(first_name,' ',last_name) as author from ".DB_PREFIX."users where id = ".$row['author'])->fetch_assoc();
 		$categoryName = $db->query("SELECT category_name from ".DB_PREFIX."categories where id = ".$row['category'])->fetch_assoc();
 		$row['author_name'] = $authorName['author'];
@@ -19,6 +26,19 @@ if($getMode == "list"){
 		$row['post_type'] = ucfirst($row['post_type']);
 		$row['date_created'] = date('F d, Y', strtotime($row['date_created']));
 		array_push($ret, $row);
+	}
+	echo json_encode($ret);
+}else if ($getMode == "del"){
+	$getArtId = mysqli_real_escape_string($db, strip_tags(trim($_POST['val'])));
+	$ret = array();
+	$delArticleSQL = $db->prepare("DELETE FROM ".DB_PREFIX."posts where id = ?");
+	$delArticleSQL->bind_param("i", $getArtId);
+	$delArticleSQL->execute();
+	if ($delArticleSQL){
+		$deleteArticleTags = $db->query("DELETE FROM ".DB_PREFIX."post_tags where post_id = ".$getArtId);
+		$ret['message'] = "success";
+	}else{
+		$ret['message'] = "failed";
 	}
 	echo json_encode($ret);
 }
