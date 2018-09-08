@@ -1,4 +1,32 @@
 <!DOCTYPE html>
+<?php include('includes/head.php'); 
+
+
+$msg = "";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST["email"];
+    $password = md5($_POST["password"]);
+	 if ($email == '' || $password == '') {
+        $msg = "You must enter all fields";
+    } else {
+        $sql = "SELECT * FROM `$DB_PREFIX.users` WHERE email = '$email' AND password = '$password'";
+        $query = mysql_query($sql);
+
+        if ($query === false) {
+            echo "Could not successfully run query ($sql) from DB: " . mysql_error();
+            exit;
+        }
+
+        if (mysql_num_rows($query) > 0) {
+         
+            header('Location: index.php');
+            exit;
+        }
+
+        $msg = "Username and password do not match";
+    }
+}
+?>
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,10 +61,10 @@
             <form>
               <h1>Login Form</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="text" name="email" class="form-control" placeholder="Username" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input type="password" name="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
                 <a class="btn btn-default submit" href="index.html">Log in</a>
@@ -55,7 +83,7 @@
 
                 <div>
                   <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                  <p> Privacy and Terms</p>
                 </div>
               </div>
             </form>
@@ -90,8 +118,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                  <h1><i class="fa fa-paw"></i></h1>
+                  <p> Privacy and Terms</p>
                 </div>
               </div>
             </form>
