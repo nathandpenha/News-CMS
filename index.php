@@ -7,7 +7,7 @@ include("includes/header.php");
 <main role="main" class="container">
 	<div class="row">
 		<?php
-		$query = "SELECT * FROM ".DB_PREFIX."posts where featured = 0 AND post_type = 'published' ORDER BY `date_created` DESC LIMIT 0,10";
+		$query = "SELECT * FROM ".DB_PREFIX."posts where featured = 0 and reviewer = 1 ORDER BY `date_created` DESC LIMIT 0,10";
 		$posts = $db->query($query);
 		if($posts->num_rows > 0) {
 			while($row = $posts->fetch_assoc()){

@@ -132,7 +132,7 @@
 						},
 						success: function(success){
 							if(success.message == "success"){
-								alert("Category Deleted!");
+								alert("New Category Added!");
 								location.reload();
 							}else{
 								alert("Some Error Occured! Please Try Again!\n"+success.message);

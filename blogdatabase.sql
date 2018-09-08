@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `authors` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(60) NOT NULL,
   `last_name` varchar(60) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `authors` (
 --
 
 CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -67,7 +67,7 @@ INSERT INTO `categories` (`id`, `category_name`) VALUES
 --
 
 CREATE TABLE `comments` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `message` text NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE `comments` (
 --
 
 CREATE TABLE `comment_votes` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `comment_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `direction` tinyint(1) NOT NULL
@@ -94,7 +94,7 @@ CREATE TABLE `comment_votes` (
 --
 
 CREATE TABLE `keywords` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `post_id` int(11) NOT NULL,
   `tag` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -106,7 +106,7 @@ CREATE TABLE `keywords` (
 --
 
 CREATE TABLE `posts` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(200) DEFAULT NULL,
   `category` int(11) DEFAULT NULL,
   `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -132,7 +132,7 @@ INSERT INTO `posts` (`id`, `title`, `category`, `date_created`, `body`, `author`
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(60) NOT NULL,
   `last_name` varchar(60) NOT NULL,
   `email` varchar(100) NOT NULL,

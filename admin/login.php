@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php include('includes/head.php'); 
 
 
@@ -8,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	 if ($email == '' || $password == '') {
         $msg = "You must enter all fields";
     } else {
-        $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
+        $sql = "SELECT * FROM `$DB_PREFIX.users` WHERE email = '$email' AND password = '$password'";
         $query = mysql_query($sql);
 
         if ($query === false) {
@@ -26,46 +27,105 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Admin Login</title>	
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
-<link href="./includes/loginstyle.css" rel="stylesheet" type="text/css">
+    <title>Gentelella Alela! | </title>
 
-</head>
-<body>
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
 
-	<form name="frmregister"action="<?= $_SERVER['PHP_SELF'] ?>" method="post" >
-		<table class="form" border="0">
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>
 
-			<tr>
-			<td></td>
-				<td style="color:red;">
-				<?php echo $msg; ?></td>
-			</tr> 
-			
-			<tr>
-				<th><label for="name"><strong>Email:</strong></label></th>
-				<td><input class="inp-text" name="email" id="email" type="text" size="30" /></td>
-			</tr>
-			<tr>
-				<th><label for="name"><strong>Password:</strong></label></th>
-				<td><input class="inp-text" name="password" id="password" type="password" size="30" /></td>
-			</tr>
-			<tr>
-			<td></td>
-				<td class="submit-button-right">
-				<input class="send_btn" type="submit" value="Submit" alt="Submit" title="Submit" />
-				
-				<input class="send_btn" type="reset" value="Reset" alt="Reset" title="Reset" /></td>
-				
-			</tr>
-		</table>
-	</form>
+  <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
 
-</body>
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form>
+              <h1>Login Form</h1>
+              <div>
+                <input type="text" name="email" class="form-control" placeholder="Username" required="" />
+              </div>
+              <div>
+                <input type="password" name="password" class="form-control" placeholder="Password" required="" />
+              </div>
+              <div>
+                <a class="btn btn-default submit" href="index.html">Log in</a>
+                <a class="reset_pass" href="#">Lost your password?</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">New to site?
+                  <a href="#signup" class="to_register"> Create Account </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                  <p> Privacy and Terms</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <div id="register" class="animate form registration_form">
+          <section class="login_content">
+            <form>
+              <h1>Create Account</h1>
+              <div>
+                <input type="text" class="form-control" placeholder="Username" required="" />
+              </div>
+              <div>
+                <input type="email" class="form-control" placeholder="Email" required="" />
+              </div>
+              <div>
+                <input type="password" class="form-control" placeholder="Password" required="" />
+              </div>
+              <div>
+                <a class="btn btn-default submit" href="index.html">Submit</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">Already a member ?
+                  <a href="#signin" class="to_register"> Log in </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i></h1>
+                  <p> Privacy and Terms</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
