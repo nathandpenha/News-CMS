@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	 if ($email == '' || $password == '') {
         $msg = "You must enter all fields";
     } else {
-        $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
+        $sql = "SELECT * FROM `$DB_PREFIX.users` WHERE email = '$email' AND password = '$password'";
         $query = mysql_query($sql);
 
         if ($query === false) {
