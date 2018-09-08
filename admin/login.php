@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	 if ($email == '' || $password == '') {
         $msg = "You must enter all fields";
     } else {
-        $sql = "SELECT * FROM authors WHERE email = '$email' AND password = '$password'";
+        $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
         $query = mysql_query($sql);
 
         if ($query === false) {
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (mysql_num_rows($query) > 0) {
          
-            header('Location: YOUR_LOCATION');
+            header('Location: index.php');
             exit;
         }
 
