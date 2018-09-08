@@ -9,3 +9,5 @@ $db = new mysqli(DB_HOST , DB_USER , DB_PASS, DB_NAME);
 
 $siteName = $db->query("SELECT meta_value FROM ".DB_PREFIX."site_meta WHERE `meta_name` = 'WebSiteName'")->fetch_assoc()['meta_value'];
 $siteDescription = $db->query("SELECT meta_value FROM ".DB_PREFIX."site_meta WHERE `meta_name` = 'WebSiteDescription'")->fetch_assoc()['meta_value'];
+
+$_SESSION['admin']=1;
