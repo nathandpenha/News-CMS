@@ -21,12 +21,9 @@
 	<link href="vendors/nprogress/nprogress.css" rel="stylesheet">
 	<!-- iCheck -->
 	<link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
 	<link rel="stylesheet" href="vendors/datatables.net-bs/css/dataTables.bootstrap.css">
-
 	<!-- Custom Theme Style -->
 	<link href="build/css/custom.min.css" rel="stylesheet">
-
 	<!-- jQuery -->
 	<script src="vendors/jquery/dist/jquery.min.js"></script>
 </head>

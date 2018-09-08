@@ -41,10 +41,8 @@ if (mysqli_connect_errno()){
 			"CREATE TABLE ".$getPrefix."site_meta (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_name` varchar(255), `meta_value` varchar(255))",
 			"CREATE TABLE ".$getPrefix."categories (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,`category_name` varchar(50))",
 			"CREATE TABLE ".$getPrefix."comments (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,`post_id` int(11) NOT NULL,`user_id` int(11) NOT NULL,`message` text NOT NULL,`date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP)",
-			"CREATE TABLE ".$getPrefix."comment_votes (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,`comment_id` int(11) NOT NULL,`user_id` int(11) NOT NULL,`direction` tinyint(1) NOT NULL)",
-			"CREATE TABLE ".$getPrefix."keywords (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,`post_id` int(11) NOT NULL,`tag` varchar(255) NOT NULL)",
 			"CREATE TABLE ".$getPrefix."users (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,`first_name` varchar(60) NOT NULL,`last_name` varchar(60) NOT NULL,`email` varchar(100) NOT NULL,`password` varchar(255) NOT NULL, `admin` int not null default 1)",
-			"CREATE TABLE ".$getPrefix."posts (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(200) DEFAULT NULL, `author` int(11) NOT NULL,`category` int(11) DEFAULT NULL,`date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,`body` longtext, `reviewer` varchar(100) DEFAULT '0', `featured` tinyint(1) NOT NULL, `post_type` varchar(100) NOT NULL DEFAULT 'draft')",
+			"CREATE TABLE ".$getPrefix."posts (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(200) DEFAULT NULL, `author` int(11) NOT NULL,`category` int(11) DEFAULT NULL,`date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,`body` longtext, `reviewer` varchar(100) DEFAULT '0', `featured` tinyint(1) NOT NULL, `post_type` varchar(100) NOT NULL DEFAULT 'draft', `enable_comments` INT NOT NULL DEFAULT '0')",
 			"CREATE TABLE ".$getPrefix."post_tags (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,`post_id` int(11) NOT NULL,`tag_id` int(11) NOT NULL)",
 			"CREATE TABLE ".$getPrefix."tags (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,`tag_name` varchar(60) NOT NULL)"
 		);
