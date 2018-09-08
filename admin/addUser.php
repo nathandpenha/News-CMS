@@ -40,7 +40,7 @@ if(isset($_POST['submit']))
 	$admin=$_POST['admin'];
 		global $db;
 
-	$query = "insert into  ".DB_PREFIX."users ( 'first_name' , 'last_name' , 'email' , 'password' , 'admin' ) values ($firstName,$lastName,$email,$password,$admin)";
+	$query = "insert into  ".DB_PREFIX."users ( first_name , last_name , email , password , admin ) values ($firstName,$lastName,$email,$password,$admin)";
 	 if($db->query($query))
 	 
 	 {
