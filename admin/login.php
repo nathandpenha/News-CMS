@@ -9,15 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	 if ($email == '' || $password == '') {
         $msg = "You must enter all fields";
     } else {
-        $sql = "SELECT * FROM `$DB_PREFIX.users` WHERE email = '$email' AND password = '$password'";
-        $query = mysql_query($sql);
+     $sql = $db->prepare("SELECT * FROM users WHERE email=? and password=?");
+	     $sql->bind_param("ss", $email,$password);
 
-        if ($query === false) {
+        if ( !$sql->execute()) {
             echo "Could not successfully run query ($sql) from DB: " . mysql_error();
             exit;
         }
-
-        if (mysql_num_rows($query) > 0) {
+		if(mysql_num_rows($sql) > 0) {
          
             header('Location: index.php');
             exit;
