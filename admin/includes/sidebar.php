@@ -35,21 +35,23 @@
 					<?php } ?>
 					<li><a href="articles.php"><i class="fa fa-file-o"></i> Articles</a>
 					</li>
-					<li><a><i class="fa fa-cog"></i>Site Settings</a>
-					</li>
+					<?php if($_SESSION['super_admin']){ ?>
+						<li><a href="site_settings.php"><i class="fa fa-cog"></i>Site Settings</a>
+						</li>
+					<?php } ?>
 				</ul>
 			</div>
-			</div>
-			<!-- /sidebar menu -->
-			<!-- /menu footer buttons -->
-			<div class="sidebar-footer hidden-small">
-				<a data-toggle="tooltip" data-placement="top" title="Back To Front End" href="../index.php" style="width:50%">
-					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				</a>
-				<a data-toggle="tooltip" data-placement="top" title="Logout" href="#" style="width:50%">
-					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-				</a>
-			</div>
-			<!-- /menu footer buttons -->
 		</div>
+		<!-- /sidebar menu -->
+		<!-- /menu footer buttons -->
+		<div class="sidebar-footer hidden-small">
+			<a data-toggle="tooltip" data-placement="top" title="Back To Front End" href="../index.php" style="width:50%">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			</a>
+			<a data-toggle="tooltip" data-placement="top" title="Logout" href="#" style="width:50%">
+				<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+			</a>
+		</div>
+		<!-- /menu footer buttons -->
 	</div>
+</div>

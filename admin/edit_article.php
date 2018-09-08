@@ -37,13 +37,13 @@ if (empty($getArticleID)){
 			}
 		}
 
-		if($getCategory == ""){
+		if($getCategory == ".."){
 			$getCategory = $getDetails['category'];
 		}
-		if($getEComments == ""){
+		if($getEComments == ".."){
 			$getEComments = $getDetails['enable_comments'];
 		}
-		if($getFeatured == ""){
+		if($getFeatured == ".."){
 			$getFeatured = $getDetails['featured'];
 		}
 		$sql = "UPDATE ".DB_PREFIX."posts SET `title`=?,`category`=?,`body`=?,`featured`=?,`post_type`='pending',`enable_comments`=? WHERE id = ".$getArticleID;

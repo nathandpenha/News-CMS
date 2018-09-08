@@ -17,12 +17,13 @@ try{
 	'".$getEmail."', md5(".$getPassword."), 1)";
 	$db->query($userSql);
 	$sql = "INSERT INTO ".DB_PREFIX."site_meta(`meta_name`, `meta_value`) VALUES ('AdminFName','".$getFirstName."'), ('AdminLName','".$getLastName."'),
-	('AdminEmail','".$getEmail."'), ('WebSiteName','".$getWebSiteName."'),('WebSiteDescription','".$getWebSiteDescription."')";
+	('AdminEmail','".$getEmail."'), ('WebSiteName','".$getWebSiteName."'),('WebSiteDescription','".$getWebSiteDescription."'), ('UserAccount','Closed')";
 	$db->query($sql);
 	$handle = fopen("../includes/base.php", 'a');
 	$data = '
 	$siteName = $db->query("SELECT meta_value FROM ".DB_PREFIX."site_meta WHERE `meta_name` = \'WebSiteName\'")->fetch_assoc()[\'meta_value\'];
 	$siteDescription = $db->query("SELECT meta_value FROM ".DB_PREFIX."site_meta WHERE `meta_name` = \'WebSiteDescription\'")->fetch_assoc()[\'meta_value\'];
+	$userAccess = $db->query("SELECT meta_value FROM ".DB_PREFIX."site_meta WHERE `meta_name` = \'UserAccount\'")->fetch_assoc()[\'meta_value\'];
 	';
 	fwrite($handle, $data);
 	fclose($handle);
