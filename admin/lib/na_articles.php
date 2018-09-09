@@ -24,7 +24,6 @@ if($getMode == "list"){
 		$row['author_name'] = $authorName['author'];
 		$row['category_name'] = $categoryName['category_name'];
 		$row['post_type'] = ucfirst($row['post_type']);
-		$row['date_created'] = date('F d, Y', strtotime($row['date_created']));
 		array_push($ret, $row);
 	}
 	echo json_encode($ret);

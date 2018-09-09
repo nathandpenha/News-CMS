@@ -30,14 +30,18 @@ if($getMode == "list"){
 }else if($getMode == "change"){
 	$getUserId = mysqli_real_escape_string($db, strip_tags(trim($_POST['uid'])));
 	$getNewRole = mysqli_real_escape_string($db, strip_tags(trim($_POST['role'])));
-	$ret = array();
-	$roleSQL = $db->prepare("UPDATE ".DB_PREFIX."users SET role = ? WHERE id = ?");
-	$roleSQL->bind_param("ss", $getNewRole, $getUserId);
-	$roleSQL->execute();
-	if ($roleSQL){
-		$ret['message'] = "success";
+	if($getNewRole != ''){
+		$ret = array();
+		$roleSQL = $db->prepare("UPDATE ".DB_PREFIX."users SET role = ? WHERE id = ?");
+		$roleSQL->bind_param("ss", $getNewRole, $getUserId);
+		$roleSQL->execute();
+		if ($roleSQL){
+			$ret['message'] = "success";
+		}else{
+			$ret['message'] = "failed";
+		}
 	}else{
-		$ret['message'] = "failed";
+		$ret['message'] = "Empty New Value";
 	}
 	echo json_encode($ret);
 }

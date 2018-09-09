@@ -1,8 +1,9 @@
 <?php
-if (!$_SESSION['super_admin']){
-	header('Location: index.php');
+include('includes/head.php');
+if ($_SESSION['super_admin'] != 1){
+	echo '<script> window.location.href = "index.php"; </script>';
 }
-include('includes/head.php'); ?>
+?>
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">

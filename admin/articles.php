@@ -1,4 +1,8 @@
-<?php include('includes/head.php'); ?>
+<?php include('includes/head.php');
+if(empty($_SESSION['loggedIN']) && ($_SESSION['role'] == 1 || empty($_SESSION['role']))){
+	echo '<script> window.location.href= "../index.php"; </script>';
+}
+?>
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
@@ -28,7 +32,6 @@
 												<th>Author</th>
 												<th>Category</th>
 												<th>Status</th>
-												<th>Date Created</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -38,7 +41,6 @@
 												<th>Author</th>
 												<th>Category</th>
 												<th>Status</th>
-												<th>Date Created</th>
 												<th>Action</th>
 											</tr>
 										</tfoot>
@@ -62,10 +64,9 @@
 					data: {
 						mode: 'list',
 						type : '<?=$_SESSION['admin'];?>',
-						uid : '<?=$getUserID;?>'
+						uid : '<?=$_SESSION['uid'];?>'
 					},
 					success: function(data){
-						console.log(data);
 						for (i = 0; i < data.length; ++i){
 							var star = "";
 							if (data[i].featured == 1){
@@ -73,7 +74,15 @@
 							}
 							var button = "<button value='"+data[i].id+"' data-toggle='tooltip' data-placement='top' title='Delete' class='btn btn-danger delArt'><i class='fa fa-trash'></i></button>";
 							button += "<a href='edit_article.php?id="+data[i].id+"'><button value='"+data[i].id+"' data-toggle='tooltip' data-placement='top' title='Edit' class='btn btn-primary editArt'><i class='fa fa-pencil'></i></button></a>";
-							table.row.add([star + data[i].title, data[i].author_name, data[i].category_name, data[i].post_type, data[i].date_created, button]).draw(false);
+							<?php
+							if($_SESSION['admin'] == 1){
+								?>
+								button += "<button value='"+data[i].id+"' data-toggle='tooltip' data-placement='top' title='Publish' class='btn btn-success pub'><i class='fa fa-print'></i></button>";
+								button += "<button value='"+data[i].id+"' data-toggle='tooltip' data-placement='top' title='Un-Publish' class='btn btn-warning unpub'><i class='fa fa-reply'></i></button>";
+								<?php
+							}
+							?>
+							table.row.add([star + data[i].title, data[i].author_name, data[i].category_name, data[i].post_type, button]).draw(false);
 						}
 					}
 				});

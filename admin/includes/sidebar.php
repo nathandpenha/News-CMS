@@ -9,11 +9,11 @@
 		<!-- menu profile quick info -->
 		<div class="profile clearfix">
 			<div class="profile_pic">
-				<img src="production/images/img.jpg" alt="..." class="img-circle profile_img">
+				<img src="<?=$_SESSION['img'];?>" alt="..." class="img-circle profile_img">
 			</div>
 			<div class="profile_info">
 				<span>Welcome,</span>
-				<h2>John Doe</h2>
+				<h2><?=($_SESSION['first_name'].' '.$_SESSION['last_name']);?></h2>
 			</div>
 		</div>
 		<!-- /menu profile quick info -->
@@ -35,7 +35,7 @@
 					<?php } ?>
 					<li><a href="articles.php"><i class="fa fa-file-o"></i> Articles</a>
 					</li>
-					<?php if($_SESSION['super_admin']){ ?>
+					<?php if($_SESSION['super_admin'] == 1){ ?>
 						<li><a href="site_settings.php"><i class="fa fa-cog"></i>Site Settings</a>
 						</li>
 					<?php } ?>
@@ -48,7 +48,7 @@
 			<a data-toggle="tooltip" data-placement="top" title="Back To Front End" href="../index.php" style="width:50%">
 				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 			</a>
-			<a data-toggle="tooltip" data-placement="top" title="Logout" href="#" style="width:50%">
+			<a data-toggle="tooltip" data-placement="top" title="Logout" href="../../logout.php" style="width:50%">
 				<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 			</a>
 		</div>
