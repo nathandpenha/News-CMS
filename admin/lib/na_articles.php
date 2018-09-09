@@ -40,4 +40,19 @@ if($getMode == "list"){
 		$ret['message'] = "failed";
 	}
 	echo json_encode($ret);
+}else if($getMode == "pub" || $getMode == "unpub"){
+	$ret = array();
+	$getArtId = mysqli_real_escape_string($db, strip_tags(trim($_POST['val'])));
+	if($getMode == "pub"){
+		$val = "published";
+	}else{
+		$val = "draft";
+	}
+	$publishArticle = $db->query("UPDATE ".DB_PREFIX."posts SET post_type = '".$val."' where id = ".$getArtId);
+	if($publishArticle){
+		$ret['message'] = "success";
+	}else{
+		$ret['message'] = "failed";
+	}
+	echo json_encode($ret);
 }

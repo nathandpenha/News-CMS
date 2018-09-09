@@ -1,7 +1,7 @@
 <?php
 include('includes/head.php');
-if ($_SESSION['super_admin'] != 1){
-	echo '<script> window.location.href = "index.php"; </script>';
+if(empty($_SESSION['loggedIN']) && ($_SESSION['role'] != 3 || empty($_SESSION['role']))){
+	echo '<script> window.location.href= "index.php"; </script>';
 }
 ?>
 <body class="nav-md">

@@ -29,5 +29,6 @@
 	<link href="vendors/select2/dist/css/select2.min.css" rel="stylesheet">
 	<style>
 	.msg{margin-top: 60px;}
+	p{font-size: 125%;}
 	</style>
 </head>

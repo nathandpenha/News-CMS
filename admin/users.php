@@ -1,4 +1,8 @@
-<?php include('includes/head.php'); ?>
+<?php include('includes/head.php');
+if(empty($_SESSION['loggedIN']) && ($_SESSION['role'] != 3 || empty($_SESSION['role']))){
+	echo '<script> window.location.href= "index.php"; </script>';
+}
+?>
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">

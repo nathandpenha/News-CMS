@@ -77,8 +77,11 @@ if(empty($_SESSION['loggedIN']) && ($_SESSION['role'] == 1 || empty($_SESSION['r
 							<?php
 							if($_SESSION['admin'] == 1){
 								?>
-								button += "<button value='"+data[i].id+"' data-toggle='tooltip' data-placement='top' title='Publish' class='btn btn-success pub'><i class='fa fa-print'></i></button>";
-								button += "<button value='"+data[i].id+"' data-toggle='tooltip' data-placement='top' title='Un-Publish' class='btn btn-warning unpub'><i class='fa fa-reply'></i></button>";
+								if(data[i].post_type == "Published"){
+									button += "<button value='"+data[i].id+"' data-toggle='tooltip' data-placement='top' title='Un-Publish' class='btn btn-warning unpub'><i class='fa fa-reply'></i></button>";
+								}else{
+									button += "<button value='"+data[i].id+"' data-toggle='tooltip' data-placement='top' title='Publish' class='btn btn-success pub'><i class='fa fa-print'></i></button>";
+								}
 								<?php
 							}
 							?>
@@ -98,6 +101,46 @@ if(empty($_SESSION['loggedIN']) && ($_SESSION['role'] == 1 || empty($_SESSION['r
 							success: function(success){
 								if(success.message == "success"){
 									alert("Article Deleted!");
+									location.reload();
+								}else{
+									alert("Some Error Occured! Please Try Again!\n"+success.message);
+								}
+							}
+						});
+					}
+				});
+				$(document).on('click', '.pub',function(){
+					if (confirm("Are You Sure ?")) {
+						$.ajax({
+							url: 'lib/na_articles.php',
+							type: 'POST',
+							data: {
+								mode: 'pub',
+								val : $(this).val()
+							},
+							success: function(success){
+								if(success.message == "success"){
+									alert("Article Published!");
+									location.reload();
+								}else{
+									alert("Some Error Occured! Please Try Again!\n"+success.message);
+								}
+							}
+						});
+					}
+				});
+				$(document).on('click', '.unpub',function(){
+					if (confirm("Are You Sure ?")) {
+						$.ajax({
+							url: 'lib/na_articles.php',
+							type: 'POST',
+							data: {
+								mode: 'unpub',
+								val : $(this).val()
+							},
+							success: function(success){
+								if(success.message == "success"){
+									alert("Article Un-Published!");
 									location.reload();
 								}else{
 									alert("Some Error Occured! Please Try Again!\n"+success.message);

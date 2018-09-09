@@ -1,6 +1,6 @@
 <?php
 include('../includes/base.php');
-if ($_SESSION['loggedIN'] != 1 && $_SESSION['admin'] > 0){
+if($_SESSION['loggedIN'] == 1 && $_SESSION['role'] != 1){
 	echo '<script> window.location.href = "index.php"; </script>';
 }
 if (isset($_POST['loginBtn'])) {
@@ -25,6 +25,8 @@ if (isset($_POST['loginBtn'])) {
 				}
 				if($getAdminEmail == $email){
 					$_SESSION['super_admin'] = 1;
+				}else{
+					$_SESSION['super_admin'] = 0;
 				}
 				$_SESSION['uid'] = $row['id'];
 				$_SESSION['first_name'] = $row['first_name'];
@@ -72,7 +74,7 @@ if (isset($_POST['loginBtn'])) {
 					<form method="post">
 						<h1>Login Form</h1>
 						<div>
-							<input type="text" name="email" class="form-control" placeholder="Username" required />
+							<input type="email" name="email" class="form-control" placeholder="Username" required />
 						</div>
 						<div>
 							<input type="password" name="password" class="form-control" placeholder="Password" required />

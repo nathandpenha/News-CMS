@@ -13,7 +13,7 @@ if($getMode == "list"){
 	$category = $db->query($query);
 	$ret = array();
 	while($row = $category->fetch_assoc()){
-		$countCat = $db->query("SELECT COUNT(*) as ans from ".DB_PREFIX."posts where category = ".$row['id']." and post_type = 'post'");
+		$countCat = $db->query("SELECT COUNT(*) as ans from ".DB_PREFIX."posts where category = ".$row['id']." and post_type = 'published'");
 		$count = $countCat->fetch_assoc();
 		$row['count'] = $count;
 		array_push($ret, $row);

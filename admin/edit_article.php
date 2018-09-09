@@ -1,5 +1,8 @@
 <?php include('includes/head.php');
 $getArticleID = $_GET['id'];
+if(empty($_SESSION['loggedIN']) && ($_SESSION['role'] == 1 || empty($_SESSION['role']))){
+	echo '<script> window.location.href= "../index.php"; </script>';
+}
 if (empty($getArticleID)){
 	echo '<script> location.href = "articles.php"; </script>';
 }else{
@@ -17,10 +20,11 @@ if (empty($getArticleID)){
 		$comm = "No";
 	}
 	if (isset($_POST['upd'])){
+
 		$getTitle = mysqli_real_escape_string($db, strip_tags(trim($_POST['title'])));
 		$getCategory = mysqli_real_escape_string($db, strip_tags(trim($_POST['category'])));
 		$getFeatured = mysqli_real_escape_string($db, strip_tags(trim($_POST['featured'])));
-		$getBody = mysqli_real_escape_string($db, strip_tags(trim($_POST['body'])));
+		$getBody = stripslashes(trim($_POST['body']));
 		$getEComments = mysqli_real_escape_string($db, strip_tags(trim($_POST['comments'])));
 		$getPTags = $_POST['tags'];
 
@@ -138,7 +142,7 @@ if (empty($getArticleID)){
 												</label>
 												<br>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<textarea id="body" rows="5" name="body" class="form-control"><?=$getDetails['body'];?></textarea>
+													<textarea id="body" rows="5" name="body" class="form-control"><?=($getDetails['body']);?></textarea>
 												</div>
 											</div>
 											<div class="form-group">
@@ -212,6 +216,8 @@ if (empty($getArticleID)){
 				<script src="vendors/datatables.net/js/jquery.dataTables.js" charset="utf-8"></script>
 				<script src="vendors/datatables.net-bs/js/dataTables.bootstrap.js" charset="utf-8"></script>
 				<script src="vendors/select2/dist/js/select2.min.js" charset="utf-8"></script>
+				<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=mni3tl5bo86qzexraoutanzws167ov5cucrg4r1dol3wpjge"></script>
+				<script>tinymce.init({ selector:'textarea' });</script>
 				<script>
 				$(document).ready(function() {
 					var table = $('#comTable').DataTable();
