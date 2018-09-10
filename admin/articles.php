@@ -11,11 +11,23 @@ if(empty($_SESSION['loggedIN']) && ($_SESSION['role'] == 1 || empty($_SESSION['r
 			<!-- page content -->
 			<div class="right_col" role="main">
 				<div class="">
+					<?php
+					if($_GET['msg'] == "suc"){
+						?>
+						<div class="alert alert-success alert-dismissible fade in msg" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+							</button>
+							<strong>Success!</strong> Successfully Added Post.
+						</div>
+						<?php
+					}
+					?>
 					<div class="page-title">
 						<div class="title_left">
 							<h3>Articles</h3>
 						</div>
 					</div>
+					<a href="add_article.php"><button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Article</i></button></a>
 					<div class="clearfix"></div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">

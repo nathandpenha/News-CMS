@@ -48,37 +48,39 @@ if(isset($_POST['addComment'])){
 					?>
 				</ul>
 			</div>
-			<div class="blog-post border-bottom">
-				<h4 class="border-bottom">Comments</h4>
-				<!-- start comments -->
-				<ul class="messages mt-3">
-					<?php
-					while($comment = $getComments->fetch_assoc()){
-						?>
-						<li>
-							<div class="message_wrapper">
-								<h5 class="heading"><?=$comment['fname'];?></h5>
-								<blockquote class="message"><?=$comment['msg'];?></blockquote>
-								<br />
-							</div>
-						</li>
+			<?php if($getPost['enable_comments'] == 1){ ?>
+				<div class="blog-post border-bottom">
+					<h4 class="border-bottom">Comments</h4>
+					<!-- start comments -->
+					<ul class="messages mt-3">
 						<?php
-					}
-					?>
-				</ul>
-				<!-- end comments -->
-			</div>
-			<div class="blog-post border-bottom pb-3">
-				<form method="post">
-					<h4>Add a comment</h4>
-					<label>Message: <span class="required">*</span>
-					</label>
-					<input type="text" name="msg" id="msg" style="width: 100%"  required="required" class="form-control col-md-7 col-xs-12">
-					<div class="ln_solid"></div>
-					<br>
-					<button type="submit" name="addComment" class="btn btn-success" >Submit</button>
-				</form>
-			</div>
+						while($comment = $getComments->fetch_assoc()){
+							?>
+							<li>
+								<div class="message_wrapper">
+									<h5 class="heading"><?=$comment['fname'];?></h5>
+									<blockquote class="message"><?=$comment['msg'];?></blockquote>
+									<br />
+								</div>
+							</li>
+							<?php
+						}
+						?>
+					</ul>
+					<!-- end comments -->
+				</div>
+				<div class="blog-post border-bottom pb-3">
+					<form method="post">
+						<h4>Add a comment</h4>
+						<label>Message: <span class="required">*</span>
+						</label>
+						<input type="text" name="msg" id="msg" style="width: 100%"  required="required" class="form-control col-md-7 col-xs-12">
+						<div class="ln_solid"></div>
+						<br>
+						<button type="submit" name="addComment" class="btn btn-success" >Submit</button>
+					</form>
+				</div>
+			<?php } ?>
 		</div>
 		<?php
 		include('includes/sidebar.php');

@@ -64,7 +64,7 @@ $getRecentComment = $db->query("SELECT * FROM ".DB_PREFIX."comments order by dat
 								</div>
 								<div class="x_content">
 									<h2>Get Started..</h2>
-									<a href="articles.php"><button class="btn btn-primary"><i class="fa fa-plus"></i> Publish An Article </button></a>
+									<a href="add_article.php"><button class="btn btn-primary"><i class="fa fa-plus"></i> Publish An Article </button></a>
 								</div>
 							</div>
 						</div>
