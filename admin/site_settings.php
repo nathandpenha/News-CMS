@@ -86,7 +86,6 @@ if(empty($_SESSION['loggedIN']) && ($_SESSION['role'] != 3 || empty($_SESSION['r
 												</div>
 											</div>
 										</form>
-
 									</div>
 								</div>
 							</div>

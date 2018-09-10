@@ -14,7 +14,6 @@ $categories = $db->query($query);
 	<meta name="description" content="<?=$siteDescription;?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" href="../../favicon.ico">
-
 	<title><?=$siteName;?></title>
 	<script src="js/bootstrap.js" ></script>
 	<!-- Bootstrap core CSS -->
@@ -28,17 +27,23 @@ $categories = $db->query($query);
 	<!-- container begins -->
 	<div class="container">
 		<header class="blog-header py-3">
-			<div class="col-12 text-center">
-				<a class="blog-header-logo text-dark" href="index.php"><?=$siteName;?></a>
-				<br>
-				<small>
-					<?php
-					$day = date('w', strtotime(date('Y-m-d')));
-					$days = array('Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday','Friday', 'Saturday');
-					echo $days[$day].', ';
-					echo date('F d, Y');
-					?>
-				</small>
+			<div class="row flex-nowrap justify-content-between align-items-center">
+
+				<div class="col-4 offset-4 text-center">
+					<a class="blog-header-logo text-dark" href="index.php"><?=$siteName;?></a>
+					<br>
+					<small>
+						<?php
+						$day = date('w', strtotime(date('Y-m-d')));
+						$days = array('Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday','Friday', 'Saturday');
+						echo $days[$day].', ';
+						echo date('F d, Y');
+						?>
+					</small>
+				</div>
+				<div class="col-4 d-flex justify-content-end align-items-center">
+					<a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+				</div>
 			</div>
 		</header>
 
