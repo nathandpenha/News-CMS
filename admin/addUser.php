@@ -3,55 +3,31 @@ include('includes/head.php');
 include("captcha/simple-php-captcha.php");
 if(isset($_POST['submit']))
 {
-	if($_POST['captcha']==$_SESSION['captcha']['code']){
-		foreach($_POST as $key=>$value) {
-			if(empty($_POST[$key])) {
-				$error_message = "All Fields are required";
-				break;exit;
-			}
+	/* Password Matching Validation */
+	if($_POST['password'] != $_POST['confirm_password']){
+		$error_message = 'Passwords should be same<br>'; exit;
+	}
+	/* Email Validation */
+	if(!isset($error_message)) {
+		if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+			$error_message = "Invalid Email Address";
+			exit;
 		}
-		/* Password Matching Validation */
-		if($_POST['password'] != $_POST['confirm_password']){
-			$error_message = 'Passwords should be same<br>'; exit;
-		}
-		/* Email Validation */
-		if(!isset($error_message)) {
-			if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-				$error_message = "Invalid Email Address";
-				exit;
-			}
-		}
-		/* Validation to check if Terms and Conditions are accepted */
-		if(!isset($error_message)) {
-			if(!isset($_POST["terms"])) {
-				$error_message = "Accept Terms and Conditions to Register";
-				exit;
-			}
-		}
-		$firstName=mysqli_real_escape_string($db, strip_tags(trim($_POST['firstName'])));
-		$lastName=mysqli_real_escape_string($db, strip_tags(trim($_POST['lastName'])));
-		$email = mysqli_real_escape_string($db, strip_tags(trim($_POST["email"])));
-		$password = mysqli_real_escape_string($db, strip_tags(trim(md5($_POST["password"]))));
-		$admin=mysqli_real_escape_string($db, strip_tags(trim($_POST['admin'])));
-		$sql = "insert into ".DB_PREFIX."users ( first_name , last_name , email , password , role ) values (?,?,?,?,?)";
-		$stmt = $db->prepare($sql);
-		$stmt->bind_param("ssssi", $firstName, $lastName, $email, $password, $admin);
-		if($stmt->execute()){
-			echo "<script> location.href= 'addUser.php?&msg=suc'; </script>";
-		}else{
-			echo "<script> location.href= 'addUser.php?&msg=fail'; </script>";
-		}
+	}
+	$firstName=mysqli_real_escape_string($db, strip_tags(trim($_POST['firstName'])));
+	$lastName=mysqli_real_escape_string($db, strip_tags(trim($_POST['lastName'])));
+	$email = mysqli_real_escape_string($db, strip_tags(trim($_POST["email"])));
+	$password = mysqli_real_escape_string($db, strip_tags(trim(md5($_POST["password"]))));
+	$admin=mysqli_real_escape_string($db, strip_tags(trim($_POST['admin'])));
+	$sql = "insert into ".DB_PREFIX."users ( first_name , last_name , email , password , role ) values (?,?,?,?,?)";
+	$stmt = $db->prepare($sql);
+	$stmt->bind_param("ssssi", $firstName, $lastName, $email, $password, $admin);
+	if($stmt->execute()){
+		echo "<script> location.href= 'addUser.php?&msg=suc'; </script>";
 	}else{
-		echo "<script> location.href= 'addUser.php?msg=fail1'; </script>";
-
+		echo "<script> location.href= 'addUser.php?&msg=fail'; </script>";
 	}
 }
-$_SESSION['captcha'] = simple_php_captcha();
-$code=trim($_SESSION['captcha']['code']);
-$image_src=$_SESSION['captcha']['image_src'];
-//var_dump($_SERVER);
-var_dump($_SESSION['captcha']);
-//echo $error_message;
 ?>
 <body class="nav-md">
 	<div class="container body">
@@ -67,7 +43,7 @@ var_dump($_SESSION['captcha']);
 						<div class="alert alert-success alert-dismissible fade in msg" role="alert">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
 							</button>
-							<strong>Success!</strong> Successfully Updated.
+							<strong>Success!</strong> Successfully Added New User.
 						</div>
 						<?php
 					}
@@ -139,14 +115,6 @@ var_dump($_SESSION['captcha']);
 													<option value="2">Editor</option>
 													<option value="1">Normal User</option>
 												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Captcha<span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 col-xs-12">
-												<img src="<?=$image_src;?>">
-												<input type="text" class="form-control col-md-7 col-xs-12" name="captcha" required>
 											</div>
 										</div>
 										<div class="ln_solid"></div>
