@@ -19,7 +19,6 @@ if (isset($_POST['ins'])){
 			$getArticleID = $db->insert_id;
 			for($i = 0; $i < sizeof($getPTags); ++$i){
 				$asd = "INSERT INTO ".DB_PREFIX."post_tags (`post_id`, `tag_id`) VALUES ( ".$getArticleID.", ".$getPTags[$i]." )";
-				error_log($asd);
 				$db->query($asd);
 			}
 		}

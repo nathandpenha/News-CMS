@@ -20,7 +20,6 @@ if (empty($getArticleID)){
 		$comm = "No";
 	}
 	if (isset($_POST['upd'])){
-
 		$getTitle = mysqli_real_escape_string($db, strip_tags(trim($_POST['title'])));
 		$getCategory = mysqli_real_escape_string($db, strip_tags(trim($_POST['category'])));
 		$getFeatured = mysqli_real_escape_string($db, strip_tags(trim($_POST['featured'])));
@@ -36,11 +35,9 @@ if (empty($getArticleID)){
 			$tagSQL = $db->query("DELETE FROM ".DB_PREFIX."post_tags where post_id = ".$getArticleID);
 			for($i = 0; $i < sizeof($getPTags); ++$i){
 				$asd = "INSERT INTO ".DB_PREFIX."post_tags (`post_id`, `tag_id`) VALUES ( ".$getArticleID.", ".$getPTags[$i]." )";
-				error_log($asd);
 				$db->query($asd);
 			}
 		}
-
 		if($getCategory == ".."){
 			$getCategory = $getDetails['category'];
 		}
@@ -52,7 +49,6 @@ if (empty($getArticleID)){
 		}
 		$sql = "UPDATE ".DB_PREFIX."posts SET `title`=?,`category`=?,`body`=?,`featured`=?,`post_type`='pending',`enable_comments`=? WHERE id = ".$getArticleID;
 		$updateSQL = $db->prepare($sql);
-
 		$updateSQL->bind_param('sisii', $getTitle, $getCategory, $getBody, $getFeatured, $getEComments);
 		$updateSQL->execute();
 		if($updateSQL){

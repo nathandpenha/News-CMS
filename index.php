@@ -7,7 +7,7 @@ include("includes/header.php");
 <main role="main" class="container">
 	<div class="row">
 		<?php
-		$query = "SELECT * FROM ".DB_PREFIX."posts where featured = 0 and reviewer = 1 ORDER BY `date_created` DESC LIMIT 0,10";
+		$query = "SELECT * FROM ".DB_PREFIX."posts where featured = 0 and post_type = 'published' ORDER BY `date_created` DESC LIMIT 0,10";
 		$posts = $db->query($query);
 		if($posts->num_rows > 0) {
 			while($row = $posts->fetch_assoc()){
@@ -16,7 +16,7 @@ include("includes/header.php");
 				?>
 				<div class="col-md-6 blog-main">
 					<div class="blog-post">
-						<h2 class="blog-post-title"><a href="article.php?node=<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></h2>
+						<h4><a href="article.php?node=<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></h4>
 						<p class="blog-post-meta"><?php echo $row['date']; ?> by <a href="user.php?id=<?=$author['id'];?>"><?=$author['author'];?></a></p>
 						<?php $body = $row['body'];
 						echo substr($body,0,40)."...";

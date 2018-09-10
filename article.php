@@ -40,33 +40,43 @@ if(isset($_POST['addComment'])){
 				<?=$getPost['body'];?>
 				<br>
 				Tags :
-				<ul class="tags1">
-					<?php
-					while($tag = $getTags->fetch_assoc()){
-						echo '<li><a href="tags.php?node='.$tag['TID'].'" class="tag1">'.$tag['tn'].'</a></li>';
-					}
-					?>
-				</ul>
+				<?php
+				if($getTags->num_rows == 0){
+					echo "<p class='my-3'>No Tags Associated with Post</p>";
+				}else{ ?>
+					<ul class="tags1">
+						<?php
+						while($tag = $getTags->fetch_assoc()){
+							echo '<li><a href="tags.php?node='.$tag['TID'].'" class="tag1">'.$tag['tn'].'</a></li>';
+						}
+						?>
+					</ul>
+				<?php } ?>
 			</div>
 			<?php if($getPost['enable_comments'] == 1){ ?>
 				<div class="blog-post border-bottom">
 					<h4 class="border-bottom">Comments</h4>
 					<!-- start comments -->
-					<ul class="messages mt-3">
-						<?php
-						while($comment = $getComments->fetch_assoc()){
-							?>
-							<li>
-								<div class="message_wrapper">
-									<h5 class="heading"><?=$comment['fname'];?></h5>
-									<blockquote class="message"><?=$comment['msg'];?></blockquote>
-									<br />
-								</div>
-							</li>
+					<?php
+					if($getComments->num_rows == 0){
+						echo "<p class='my-3'> No Comments Yet!";
+					}else{ ?>
+						<ul class="messages mt-3">
 							<?php
-						}
-						?>
-					</ul>
+							while($comment = $getComments->fetch_assoc()){
+								?>
+								<li>
+									<div class="message_wrapper">
+										<h5 class="heading"><?=$comment['fname'];?></h5>
+										<blockquote class="message"><?=$comment['msg'];?></blockquote>
+										<br />
+									</div>
+								</li>
+								<?php
+							}
+							?>
+						</ul>
+					<?php } ?>
 					<!-- end comments -->
 				</div>
 				<div class="blog-post border-bottom pb-3">
