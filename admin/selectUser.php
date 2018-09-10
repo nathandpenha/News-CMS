@@ -54,5 +54,39 @@ include('includes/head.php');
 						</div>
 					</div>
 				</div>
-				<!-- /page content -->
-				<?php include('includes/footer.php'); ?>
+				<!-- /page content --><!-- /page content -->
+			<script>
+			$(document).ready(function() {
+				$("select").val("<?=$userAccess;?>");
+				$(document).on('click', '.act', function(event) {
+					event.preventDefault();
+					if($(this).val() == "userAccBtn"){
+						var mode = 'UserAccount';
+						var val = $("#userAcc").val();
+					}else if ($(this).val() == "sDescBtn"){
+						var mode ='WebSiteDescription';
+						var val =$("#site_desc").val();
+					}else if($(this).val()== "sNameBtn"){
+						var mode = 'WebSiteName';
+						var val = $("#site_name").val();
+					}
+					$.ajax({
+						url: 'lib/na_site_config.php',
+						type: 'POST',
+						data: {
+							mode: mode,
+							val : val
+						},
+						success: function(data){
+							if (data.message == "success"){
+								alert("Successfully Changed!");
+								location.reload();
+							}else{
+								alert("Some Error Occured");
+							}
+						}
+					});
+				});
+			});
+			</script>
+			<?php include('includes/footer.php'); ?>

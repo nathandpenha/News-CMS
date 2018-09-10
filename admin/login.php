@@ -1,13 +1,22 @@
 <?php
 include('../includes/base.php');
-if($_SESSION['loggedIN'] == 1 && $_SESSION['role'] != 1){
-	echo '<script> window.location.href = "index.php"; </script>';
+
+if($_GET['msg']=='suc'  ){
+	
+	session_destroy();
+}
+
+
+else if($_SESSION['loggedIN'] == 1 && $_SESSION['role'] != 1){
+	echo '<script> window.location.href = "./index.php"; </script>';
 }
 if (isset($_POST['loginBtn'])) {
 	$email = mysqli_real_escape_string($db, strip_tags(trim($_POST["email"])));
 	$password = mysqli_real_escape_string($db, strip_tags(trim(md5($_POST["password"]))));
+	
 	if ($email != '' && $password != '') {
-		$s = "SELECT * FROM ".DB_PREFIX."users WHERE email = ? and role != 1";
+		$s = "SELECT * FROM ".DB_PREFIX."users WHERE email = ? and admin != 1";
+		
 		$sql = $db->prepare($s);
 		$sql->bind_param("s", $email);
 		$sql->execute();
@@ -32,6 +41,7 @@ if (isset($_POST['loginBtn'])) {
 				$_SESSION['first_name'] = $row['first_name'];
 				$_SESSION['last_name'] = $row['last_name'];
 				$_SESSION['role'] = $row['role'];
+				$_SESSION['email']=$email; 
 				$_SESSION['img'] = 'https://gravatar.com/avatar/'.md5($loginSQL["email"]);
 				header('Location: index.php?msg=suc');
 			}else{
@@ -66,9 +76,30 @@ if (isset($_POST['loginBtn'])) {
 </head>
 <body class="login">
 	<div>
+	<?php
+						if($_GET['msg'] == "suc"){
+							?>
+							<div class="alert alert-success alert-dismissible fade in msg" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+								</button>
+								<strong>Success!</strong> Successfully Updated.
+							</div>
+							<?php
+						}
+						if($_GET['msg'] == "fail"){
+							?>
+							<div class="alert alert-danger alert-dismissible fade in msg" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+								</button>
+								<strong>Failed!</strong> Some Error Occured. Please Try Again!
+							</div>
+							<?php
+						}
+						?>
 		<a class="hiddenanchor" id="signup"></a>
 		<a class="hiddenanchor" id="signin"></a>
 		<div class="login_wrapper">
+		
 			<div class="animate form login_form">
 				<section class="login_content">
 					<form method="post">

@@ -73,10 +73,7 @@ if(isset($_POST['submit']))
 		
 }
  }
-?>
-<?php
-	include('../includes/base.php');
-?>
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,15 +141,15 @@ if(isset($_POST['submit']))
 											<?php } ?>
 											<tr>
 												<td>First Name</td>
-												<td><input type="text" class="form-control col-md-7 col-xs-12" name="firstName" value=""></td>
+												<td><input type="text" class="form-control col-md-7 col-xs-12" name="firstName" value="<?=$_SESSION['first_name'];?>"></td>
 											</tr>
 											<tr>
 												<td>Last Name</td>
-												<td><input type="text" class="form-control col-md-7 col-xs-12" name="lastName" value=""></td>
+												<td><input type="text" class="form-control col-md-7 col-xs-12" name="lastName" value="<?=$_SESSION['last_name'];?>"></td>
 											</tr>
 											<tr>
 												<td>Email</td>
-												<td><input type="text" class="form-control col-md-7 col-xs-12" name="email" value="<?php if(isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>"></td>
+												<td><input type="text" class="form-control col-md-7 col-xs-12" name="email" value="<?=$_SESSION['email'];?>"></td>
 											</tr>
 											
 											<tr>
