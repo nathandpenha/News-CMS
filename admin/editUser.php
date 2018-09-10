@@ -1,16 +1,9 @@
 <?php
-require('../includes/base.php');
 include("./captcha/simple-php-captcha.php");
-echo $DB_PREFIX;
-$sql = "SELECT email from ".$DB_PREFIX."users";
-																
-																if($db->query($sql)){
-																	echo "done";
-																}
-																else{echo mysqli_error($db);}
 
+include('../includes/base.php');
 
-
+$selectedemail=$_POST['selectedemail'];
 
 
 if((isset($_POST['submit']))){}else{
@@ -18,8 +11,6 @@ $_SESSION['captcha'] = simple_php_captcha();
 }
 $code=trim($_SESSION['captcha']['code']);
 $image_src=trim($_SESSION['captcha']['image_src']);
-
-echo implode(",",$_SESSION['captcha']);
 
 
 if(isset($_POST['submit']))
@@ -64,8 +55,8 @@ if(isset($_POST['submit']))
 	
 	global $db;
 
-	$stmt = $db->prepare ("insert into  ".DB_PREFIX."users ( first_name , last_name , email , password , admin ) values (?,?,?,?,?)");
-	$stmt->bind_param("sssss", $firstName, $lastName, $email,$password,$admin);
+	$stmt = $db->prepare ("update ".DB_PREFIX."users set  first_name=? , last_name=? , email=? , password=? , admin=?  where email=?");
+	$stmt->bind_param("ssssss", $firstName, $lastName, $email,$password,$admin,$selectedemail);
 
 	
 	if($stmt->execute())
@@ -140,6 +131,9 @@ if(isset($_POST['submit']))
 									<div class="clearfix"></div>
 								</div>
 								<div class="x_content">
+								
+								Edit Details for User <?php echo $selectedemail; ?>
+								
 									<form name="frmRegistration" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 										<table border="0" width="500" align="center" class="demo-table">
 											<?php if(!empty($success_message)) { ?>
@@ -150,24 +144,17 @@ if(isset($_POST['submit']))
 											<?php } ?>
 											<tr>
 												<td>First Name</td>
-												<td><input type="text" class="demoInputBox" name="firstName" value="<?php if(isset($_POST['firstName'])) echo $_POST['firstName']; ?>"></td>
+												<td><input type="text" class="demoInputBox" name="firstName" value=""></td>
 											</tr>
 											<tr>
 												<td>Last Name</td>
-												<td><input type="text" class="demoInputBox" name="lastName" value="<?php if(isset($_POST['lastName'])) echo $_POST['lastName']; ?>"></td>
+												<td><input type="text" class="demoInputBox" name="lastName" value=""></td>
 											</tr>
-											<tr><td>
-													Email <select name="email">
-														<?php  $sql = "SELECT email from $DB_PREFIX.users;";
-																$result = $db->query($sql);
-																while($row = $result->fetch_assoc()) {
-																	$emailvalue=$row["email"];
-													echo "<option value=$emailvalue>" .$emailvalue."</option>" ;
-													}
-														?>
-														</select>
-												</td>
-												</tr>
+											<tr>
+												<td>Email</td>
+												<td><input type="text" class="demoInputBox" name="email" value="<?php if(isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>"></td>
+											</tr>
+											
 											<tr>
 												<td>Password</td>
 												<td><input type="password" class="demoInputBox" name="password" value=""></td>
@@ -195,7 +182,7 @@ if(isset($_POST['submit']))
 												<tr>	
 												<td>	<input type="submit" name="submit" value="Register" class="btnRegister"></td>
 												</tr>
-												
+												<input type="hidden" name="selectedemail" value="<?php echo $selectedemail;?>" class="btnRegister">
 											</table>
 										</form>
 									</div>

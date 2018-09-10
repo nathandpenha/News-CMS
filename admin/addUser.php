@@ -10,7 +10,6 @@ $_SESSION['captcha'] = simple_php_captcha();
 $code=trim($_SESSION['captcha']['code']);
 $image_src=trim($_SESSION['captcha']['image_src']);
 
-echo implode(",",$_SESSION['captcha']);
 
 
 if(isset($_POST['submit']))
