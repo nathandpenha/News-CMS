@@ -43,12 +43,15 @@ if(isset($_POST['lastnamechanged'])){
 
 if(isset($_POST['passwordchanged'])){
 	
+	
 	$oldpassword=mysqli_real_escape_string($db, strip_tags(trim(md5($_POST["oldpassword"]))));
 	$newpassword=mysqli_real_escape_string($db, strip_tags(trim(md5($_POST["newpassword"]))));
+	$confirnewpassword=mysqli_real_escape_string($db, strip_tags(trim(md5($_POST["confirnewpassword"]))));
+	
 	$stmt = $db->prepare ("update ".DB_PREFIX."users set  password=?   where email=? and password=? ");
 	$stmt->bind_param("sss", $newpassword, $_SESSION['email'],$oldpassword);
 
-	
+	if($confirnewpassword==$newpassword){
 	if($stmt->execute())
 	{
 		echo "<script> location.href= './login.php?&msg=suc'; </script>";
@@ -56,7 +59,9 @@ if(isset($_POST['passwordchanged'])){
 	{
 		echo "<script> location.href= './profile.php?&msg=fail'; </script>";
 	}
-	
+	}else{
+		echo "<script> location.href= './profile.php?&msg=fail'; </script>";
+	}
 	
 
 	
@@ -169,26 +174,47 @@ if(isset($_POST['passwordchanged'])){
 									
 									<form class="form-horizontal form-label-left" method="post">
 									<div class="form-group">
+									<table><tr>
 											<label class="col-sm-3 control-label">Old Password</label>
 											<div class="col-sm-9 col-md-6">
 												<div class="input-group" >
 													<input type="password" name="oldpassword" class="form-control" > 
 													<span class="input-group-btn">
+													
+													<input type="submit" value="Change Password" name="passwordchanged" class="btn  btn-primary">
+														
 													</span>
 												</div>
 											</div>
+											</tr>
 											
+											<tr>
+											<br>
 											<div class="col-sm-9 col-md-6">
 											<label class="col-sm-3 control-label">New Password</label>
 											
 												<div class="input-group" >
 													<input type="password" name="newpassword" class="form-control"  > 
 													<span class="input-group-btn">
-														<input type="submit" value="Change Password" name="passwordchanged" class="btn  btn-primary">
 														</span>
 												</div>
-											</div>
+											
 										</div>
+										</tr>
+										<tr>
+											<label class="col-sm-3 control-label">Confirm Password</label>
+											<div class="col-sm-9 col-md-6">
+												<div class="input-group" >
+													<input type="password" name="confirnewpassword" class="form-control" > 
+													<span class="input-group-btn">
+														<input type="submit" value="Change Password" name="passwordchanged" class="btn  btn-primary">
+													
+													</span>
+												</div>
+											</div>
+											</tr>
+											
+										</table>
 									</form>
 									 
                         </div>
@@ -196,9 +222,9 @@ if(isset($_POST['passwordchanged'])){
                     </div>
                   </div>
                 </div>
-              </div>
+             
             </div>
-          </div>
+          
         </div>
         <!-- /page content -->
 
