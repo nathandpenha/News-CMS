@@ -12,7 +12,7 @@
 			</ol>
 		</div>
 		<div class="col-md-4">
-			<a href="admin/">Panel</a>
+			<a href="admin/login.php">Panel</a>
 		</div>
 	</div>
 	<p>

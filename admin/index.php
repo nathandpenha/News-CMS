@@ -33,11 +33,11 @@ $getRecentComment = $db->query("SELECT * FROM ".DB_PREFIX."comments order by dat
 					<div class="row tile_count">
 						<div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
 							<span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-							<div class="count"><?=$totalUsers;?></div>
+							<div class="count green"><?=$totalUsers;?></div>
 						</div>
 						<div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
 							<span class="count_top"><i class="fa fa-file-o"></i> Total Published Articles</span>
-							<div class="count"><?=$totalPublishedPosts;?></div>
+							<div class="count green"><?=$totalPublishedPosts;?></div>
 						</div>
 						<div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
 							<span class="count_top"><i class="fa fa-tags"></i> Total Tags</span>
@@ -45,7 +45,7 @@ $getRecentComment = $db->query("SELECT * FROM ".DB_PREFIX."comments order by dat
 						</div>
 						<div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
 							<span class="count_top"><i class="fa fa-pencil"></i> Total Categories</span>
-							<div class="count"><?=$totalCategories;?></div>
+							<div class="count green"><?=$totalCategories;?></div>
 						</div>
 					</div>
 					<!-- /top tiles -->
@@ -59,7 +59,7 @@ $getRecentComment = $db->query("SELECT * FROM ".DB_PREFIX."comments order by dat
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Welcome to NA Dashboard</h2>
+									<h2>Welcome to NA Dashboard </h2>
 									<div class="clearfix"></div>
 								</div>
 								<div class="x_content">

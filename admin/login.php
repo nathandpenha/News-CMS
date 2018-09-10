@@ -28,11 +28,12 @@ if (isset($_POST['loginBtn'])) {
 				}else{
 					$_SESSION['super_admin'] = 0;
 				}
+				$_SESSION['email'] = $email;
 				$_SESSION['uid'] = $row['id'];
 				$_SESSION['first_name'] = $row['first_name'];
 				$_SESSION['last_name'] = $row['last_name'];
 				$_SESSION['role'] = $row['role'];
-				$_SESSION['img'] = 'https://gravatar.com/avatar/'.md5($loginSQL["email"]);
+				$_SESSION['img'] = 'https://gravatar.com/avatar/'.md5($email);
 				header('Location: index.php?msg=suc');
 			}else{
 				header('Location: login.php?msg=mis');
@@ -52,7 +53,7 @@ if (isset($_POST['loginBtn'])) {
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gentelella Alela! | </title>
+	<title><?=$siteName;?></title>
 	<!-- Bootstrap -->
 	<link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Font Awesome -->
