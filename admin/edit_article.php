@@ -8,7 +8,7 @@ if (empty($getArticleID)){
 }else{
 	$getDetails = $db->query("SELECT * FROM ".DB_PREFIX."posts where id = ".$getArticleID)->fetch_assoc();
 	$getArtCat = $db->query("SELECT category_name from ".DB_PREFIX."categories where id = ".$getDetails['category'])->fetch_assoc();
-	$getPostTags = $db->query("SELECT t.tag_name, p.tag_id as TID FROM ".DB_PREFIX."post_tags p, ".DB_PREFIX."tags t where p.post_id = t.id and p.post_id = ".$getArticleID);
+	$getPostTags = $db->query("SELECT t.tag_name, p.tag_id as TID FROM ".DB_PREFIX."post_tags p, ".DB_PREFIX."tags t where p.tag_id = t.id and p.post_id = ".$getArticleID);
 	if($getDetails['featured'] == 1){
 		$feat = "Yes";
 	}else{

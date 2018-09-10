@@ -80,7 +80,7 @@ $getRecentComment = $db->query("SELECT * FROM ".DB_PREFIX."comments order by dat
 								<div class="x_content">
 									<h2>Post </h2>
 									<h4> <?=$getRecentPost['title'];?>
-										&nbsp; &nbsp; &nbsp;<small> <?=date('F d, Y', strtotime($getRecentPost['date_created']));?>
+										&nbsp; &nbsp; &nbsp;<small> <?=date('F d, Y', strtotime($getRecentPost['date_created']));?></small>
 									</h4>
 									<p><?=substr($getRecentPost['body'], 0,200);?></p>
 								</div>
@@ -88,7 +88,7 @@ $getRecentComment = $db->query("SELECT * FROM ".DB_PREFIX."comments order by dat
 								<hr>
 								<div class="clearfix"></div>
 								<h2> Comments
-									&nbsp; &nbsp; &nbsp;<small> <?=date('F d, Y', strtotime($getRecentComment['date_created']));?>
+									&nbsp; &nbsp; &nbsp;<small> <?=date('F d, Y', strtotime($getRecentComment['date_created']));?></small>
 								</h2>
 								<p><?=$getRecentComment['message'];?></p>
 							</div>

@@ -1,19 +1,26 @@
+<?php
+$getArchives = $db->query("SELECT DISTINCT(monthname(date_created)) mnt, YEAR(date_created) yr FROM ".DB_PREFIX."posts GROUP by monthname(date_created), year(date_created)");
+$getLatest = $db->query("SELECT * from ".DB_PREFIX."posts where post_type = 'published' and id != ".$getID." order by date_created desc limit 0,5");
+?>
 <aside class="col-md-4 blog-sidebar">
 	<div class="p-3">
-		<h4 class="font-italic">Archives</h4>
+		<h4 class="font-italic">In Other News</h4>
 		<ol class="list-unstyled mb-0">
-			<li><a href="#">March 2014</a></li>
-			<li><a href="#">February 2014</a></li>
-			<li><a href="#">January 2014</a></li>
-			<li><a href="#">December 2013</a></li>
-			<li><a href="#">November 2013</a></li>
-			<li><a href="#">October 2013</a></li>
-			<li><a href="#">September 2013</a></li>
-			<li><a href="#">August 2013</a></li>
-			<li><a href="#">July 2013</a></li>
-			<li><a href="#">June 2013</a></li>
-			<li><a href="#">May 2013</a></li>
-			<li><a href="#">April 2013</a></li>
+			<?php
+			while($latest = $getLatest->fetch_assoc()){
+				echo '<li><a href="article.php?node='.$latest['id'].'">'.$latest['title'].'</a></li>';
+			}
+			?>
+		</ol>
+	</div>
+	<div class="p-3">
+		<h4 class="font-italic">Archives</h4>
+		<ol class="list-unstyled mb-0" style="">
+			<?php
+			while($archive = $getArchives->fetch_assoc()){
+				echo '<li><a href="archive.php?month='.$archive['mnt'].'&year='.$archive['yr'].'">'.($archive['mnt'].' '.$archive['yr']).'</a></li>';
+			}
+			?>
 		</ol>
 	</div>
 </aside>

@@ -15,7 +15,7 @@ if (mysqli_connect_errno()){
 	error_log("Failed to connect to DB");
 	?>
 	<script type="text/javascript">
-	//location.href="../na-install.php?err=dbConnectFail";
+	location.href="../na-install.php?err=dbConnectFail";
 	</script>
 	<?php
 }else{

@@ -16,12 +16,12 @@ include("includes/header.php");
 				?>
 				<div class="col-md-6 blog-main">
 					<div class="blog-post">
-						<h2 class="blog-post-title"><a href="single.php?post=<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></h2>
+						<h2 class="blog-post-title"><a href="article.php?node=<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></h2>
 						<p class="blog-post-meta"><?php echo $row['date']; ?> by <a href="user.php?id=<?=$author['id'];?>"><?=$author['author'];?></a></p>
 						<?php $body = $row['body'];
-						echo substr($body,0,30)."...";
+						echo substr($body,0,40)."...";
 						?>
-						<a href="single.php?post=<?php echo $row['id']; ?>" class="btn btn-primary">Read More</a>
+						<a href="article.php?node=<?php echo $row['id']; ?>" class="btn btn-primary">Read More</a>
 					</div><!-- /.blog-post -->
 				</div>
 				<?php
