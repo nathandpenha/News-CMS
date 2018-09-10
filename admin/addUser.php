@@ -1,9 +1,21 @@
 <?php
 include('includes/head.php');
 
+include("./captcha/simple-php-captcha.php");
+
+
+if((isset($_POST['submit']))){}else{
+$_SESSION['captcha'] = simple_php_captcha();
+}
+$code=trim($_SESSION['captcha']['code']);
+$image_src=trim($_SESSION['captcha']['image_src']);
+
+echo implode(",",$_SESSION['captcha']);
+
 
 if(isset($_POST['submit']))
-{
+{ 
+ if($_POST['captcha']==$code){
 	foreach($_POST as $key=>$value) {
 		if(empty($_POST[$key])) {
 			$error_message = "All Fields are required";
@@ -32,7 +44,7 @@ if(isset($_POST['submit']))
 		}
 	}
 
-	$firstName=($_POST['firstName']);
+	$firstName=mysqli_real_escape_string($db, strip_tags(trim($_POST['firstName'])));
 	$lastName=mysqli_real_escape_string($db, strip_tags(trim($_POST['lastName'])));
 	$email = mysqli_real_escape_string($db, strip_tags(trim($_POST["email"])));
 	$password = mysqli_real_escape_string($db, strip_tags(trim(md5($_POST["password"]))));
@@ -54,10 +66,13 @@ if(isset($_POST['submit']))
 	{
 		echo "user add failed".mysqli_error($db);
 	}
-
-
+	
+	
+}else{
+	echo"Incorrect Captcha";
+		
 }
-
+ }
 ?>
 <body class="nav-md">
 	<div class="container body">
@@ -110,15 +125,25 @@ if(isset($_POST['submit']))
 												<td><input type="password" class="demoInputBox" name="confirm_password" value=""></td>
 											</tr>
 											<tr>
-												<td>User Type</td>
-												<td><input type="radio" name="admin" value="admin" <?php if(isset($_POST['admin']) && $_POST['admin']=="admin") { ?>checked<?php  } ?>> Admin
-													<input type="radio" name="admin" value="editor" <?php if(isset($_POST['admin']) && $_POST['admin']=="editor") { ?>checked<?php  } ?>> Editor
+												<td>User Type<select name="admin">
+													<option  value="3" > Admin</option>
+													<option  value="2" > Editor</option>
+												</select>
 												</td>
 											</tr>
 											<tr>
 												<td colspan=2>
-													<input type="checkbox" name="terms"> I accept Terms and Conditions <input type="submit" name="submit" value="Register" class="btnRegister"></td>
+													<input type="checkbox" name="terms"> I accept Terms and Conditions 
+											</tr>
+											<tr>
+												<td>Enter the text you see</td>
+												<td><img src="<?php $image_src;?>"></td>
+												<td><input type="text class="demoInputBox" name="captcha"  ></td>
+											</tr>
+												<tr>	
+												<td>	<input type="submit" name="submit" value="Register" class="btnRegister"></td>
 												</tr>
+												
 											</table>
 										</form>
 									</div>
