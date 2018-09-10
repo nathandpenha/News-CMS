@@ -60,15 +60,16 @@ if(isset($_POST['submit']))
 	
 	if($stmt->execute())
 	{
-		echo "user added";
+		echo "<script> location.href= 'addUser.php?&msg=suc'; </script>";
 	}else
 	{
-		echo "user add failed".mysqli_error($db);
+	echo "<script> location.href= 'addUser.php?&msg=fail'; </script>";
+		
 	}
 	
 	
 }else{
-	echo"Incorrect Captcha";
+	echo "<script> location.href= 'addUser.php?msg=fail'; </script>";
 		
 }
  }
@@ -80,6 +81,28 @@ if(isset($_POST['submit']))
 			<?php include('includes/topbar.php'); ?>
 			<!-- page content -->
 			<div class="right_col" role="main">
+							<div class="">
+						<?php
+						if($_GET['msg'] == "suc"){
+							?>
+							<div class="alert alert-success alert-dismissible fade in msg" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+								</button>
+								<strong>Success!</strong> Successfully Updated.
+							</div>
+							<?php
+						}
+						if($_GET['msg'] == "fail"){
+							?>
+							<div class="alert alert-danger alert-dismissible fade in msg" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+								</button>
+								<strong>Failed!</strong> Some Error Occured. Please Try Again!
+							</div>
+							<?php
+						}
+						?>
+		
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
