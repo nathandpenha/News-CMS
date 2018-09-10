@@ -13,8 +13,8 @@ $getWebSiteDescription = mysqli_real_escape_string($db, strip_tags(trim($_POST['
 
 //setup admin
 try{
-	$userSql = "INSERT INTO ".DB_PREFIX."users (`first_name`, `last_name`, `email`, `password`, `reviewer`) VALUES ('".$getFirstName."', '".$getLastName."',
-	'".$getEmail."', md5(".$getPassword."), 1)";
+	$userSql = "INSERT INTO ".DB_PREFIX."users (`first_name`, `last_name`, `email`, `password`, `role`) VALUES ('".$getFirstName."', '".$getLastName."',
+	'".$getEmail."', md5('".$getPassword."'), 3)";
 	$db->query($userSql);
 	$sql = "INSERT INTO ".DB_PREFIX."site_meta(`meta_name`, `meta_value`) VALUES ('AdminFName','".$getFirstName."'), ('AdminLName','".$getLastName."'),
 	('AdminEmail','".$getEmail."'), ('WebSiteName','".$getWebSiteName."'),('WebSiteDescription','".$getWebSiteDescription."'), ('UserAccount','Closed')";
