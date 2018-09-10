@@ -13,7 +13,7 @@
 						<span class=" fa fa-angle-down"></span>
 					</a>
 					<ul class="dropdown-menu dropdown-usermenu pull-right">
-						<li><a href="javascript:;"> Profile</a></li>
+						<li><a href="../admin/profile.php"> Profile</a></li>
 						<li><a href="../../logout.php"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
 					</ul>
 				</li>
