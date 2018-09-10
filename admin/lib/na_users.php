@@ -9,7 +9,12 @@ global $db;
 $getMode = $_POST['mode'];
 
 if($getMode == "list"){
-	$users = $db->query("SELECT * FROM ".DB_PREFIX."users");
+	if($_SESSION['super_admin']){
+		$userSQL = "SELECT * FROM ".DB_PREFIX."users";
+	}else{
+		$userSQL = "SELECT * FROM ".DB_PREFIX."users where email not in (select meta_value from ".DB_PREFIX."site_meta where meta_name = 'AdminEmail')";
+	}
+	$users = $db->query($userSQL);
 	$ret = array();
 	while($row = $users->fetch_assoc()){
 		array_push($ret, $row);

@@ -12,7 +12,13 @@
 			</ol>
 		</div>
 		<div class="col-md-4">
-			<a href="admin/login.php">Panel</a>
+			<?php
+			if($_SESSION['role'] > 1){
+				?>
+				<a href="admin/login.php">Panel</a>
+				<?php
+			}
+			?>
 		</div>
 	</div>
 	<p>

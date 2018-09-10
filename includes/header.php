@@ -28,8 +28,16 @@ $categories = $db->query($query);
 	<div class="container">
 		<header class="blog-header py-3">
 			<div class="row flex-nowrap justify-content-between align-items-center">
-
+				<?php
+				if(empty($_SESSION['loggedIN']) || $_SESSION['loggedIN'] == null){
+				?>
 				<div class="col-4 offset-4 text-center">
+				<?php }else{ ?>
+					<div class="col-4">
+						<?="Welcome, ".$_SESSION['first_name']." ".$_SESSION['last_name'];?>
+					</div>
+					<div class="col-4 text-center">
+				<?php } ?>
 					<a class="blog-header-logo text-dark" href="index.php"><?=$siteName;?></a>
 					<br>
 					<small>
@@ -38,11 +46,24 @@ $categories = $db->query($query);
 						$days = array('Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday','Friday', 'Saturday');
 						echo $days[$day].', ';
 						echo date('F d, Y');
+						echo $_SESSION['loggedIN'];
 						?>
 					</small>
 				</div>
 				<div class="col-4 d-flex justify-content-end align-items-center">
-					<a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+					<?php
+					$checkOpen = $db->query("SELECT meta_value from ".DB_PREFIX."site_meta where meta_name = 'UserAccount' ")->fetch_assoc()['meta_value'];
+					if($checkOpen == "open"){
+						?>
+						<a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+						<?php
+					}
+					if(empty($_SESSION['loggedIN']) || $_SESSION['loggedIN'] == null){
+						?>
+						<a class="btn btn-sm btn-outline-secondary" href="login.php">Log In</a>
+					<?php }else{
+						echo '<a class="btn btn-sm btn-outline-secondary" href="logout.php">Log Out</a>';
+						 } ?>
 				</div>
 			</div>
 		</header>

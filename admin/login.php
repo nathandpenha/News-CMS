@@ -67,10 +67,30 @@ if (isset($_POST['loginBtn'])) {
 </head>
 <body class="login">
 	<div>
-		<a class="hiddenanchor" id="signup"></a>
-		<a class="hiddenanchor" id="signin"></a>
 		<div class="login_wrapper">
 			<div class="animate form login_form">
+				<?php
+				if($_GET['msg'] == "fname" || $_GET['msg'] == "lname"){
+					?>
+					<div class="alert alert-success alert-dismissible fade in msg" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+						</button>
+						<strong>Success!</strong>Name Changed. Please Re-Login!
+					</div>
+					<?php
+				}
+				?>
+				<?php
+				if($_GET['msg'] == "pass" ){
+					?>
+					<div class="alert alert-success alert-dismissible fade in msg" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+						</button>
+						<strong>Success!</strong>Password Changed. Please Re-Login!
+					</div>
+					<?php
+				}
+				?>
 				<section class="login_content">
 					<form method="post">
 						<h1>Login Form</h1>

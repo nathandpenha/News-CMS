@@ -1,18 +1,13 @@
 <?php
 include('./includes/base.php');
-if($_GET['msg']=='suc'  ){
-	session_destroy();
-}
 if($_SESSION['loggedIN'] == 1 ){
 	echo '<script> window.location.href = "./index.php"; </script>';
 }
 if (isset($_POST['loginBtn'])) {
 	$email = mysqli_real_escape_string($db, strip_tags(trim($_POST["email"])));
 	$password = mysqli_real_escape_string($db, strip_tags(trim(md5($_POST["password"]))));
-
 	if ($email != '' && $password != '') {
 		$s = "SELECT * FROM ".DB_PREFIX."users WHERE email = ?";
-
 		$sql = $db->prepare($s);
 		$sql->bind_param("s", $email);
 		$sql->execute();
