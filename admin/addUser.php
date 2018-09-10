@@ -32,15 +32,22 @@ if(isset($_POST['submit']))
 		}
 	}
 
-	$firstName=$_POST['firstName'];
-	$lastName=$_POST['lastName'];
-	$email=$_POST['email'];
-	$password=$_POST['password'];
-	$admin=$_POST['admin'];
+	$firstName=($_POST['firstName']);
+	$lastName=mysqli_real_escape_string($db, strip_tags(trim($_POST['lastName'])));
+	$email = mysqli_real_escape_string($db, strip_tags(trim($_POST["email"])));
+	$password = mysqli_real_escape_string($db, strip_tags(trim(md5($_POST["password"]))));
+	$admin=mysqli_real_escape_string($db, strip_tags(trim($_POST['admin'])));
+	
+	
+	
+	
 	global $db;
 
-	$query = "insert into  ".DB_PREFIX."users ( 'first_name' , 'last_name' , 'email' , 'password' , 'admin' ) values ($firstName,$lastName,$email,$password,$admin)";
-	if($db->query($query))
+	$stmt = $db->prepare ("insert into  ".DB_PREFIX."users ( first_name , last_name , email , password , admin ) values (?,?,?,?,?)");
+	$stmt->bind_param("sssss", $firstName, $lastName, $email,$password,$admin);
+
+	
+	if($stmt->execute())
 	{
 		echo "user added";
 	}else
