@@ -104,17 +104,7 @@ if(isset($_POST['passwordchanged'])){
                 <h3>User Profile</h3>
               </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
               </div>
-            </div>
             
             <div class="clearfix"></div>
 
@@ -150,7 +140,7 @@ if(isset($_POST['passwordchanged'])){
                           </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
-                         <form class="form-horizontal form-label-left" method="post">
+									<form class="form-horizontal form-label-left" method="post">
 									<div class="form-group">
 											<label class="col-sm-3 control-label">Change First Name</label>
 											<div class="col-sm-9 col-md-6">
@@ -200,10 +190,7 @@ if(isset($_POST['passwordchanged'])){
 											</div>
 										</div>
 									</form>
-									 <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                            <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui
-                              photo booth letterpress, commodo enim craft beer mlkshk </p>
-                          </div>
+									 
                         </div>
                       </div>
                     </div>
@@ -215,38 +202,4 @@ if(isset($_POST['passwordchanged'])){
         </div>
         <!-- /page content -->
 
-       <script>
-			$(document).ready(function() {
-				$("select").val("<?=$userAccess;?>");
-				$(document).on('click', '.act', function(event) {
-					event.preventDefault();
-					if($(this).val() == "userAccBtn"){
-						var mode = 'UserAccount';
-						var val = $("#userAcc").val();
-					}else if ($(this).val() == "sDescBtn"){
-						var mode ='WebSiteDescription';
-						var val =$("#site_desc").val();
-					}else if($(this).val()== "sNameBtn"){
-						var mode = 'WebSiteName';
-						var val = $("#site_name").val();
-					}
-					$.ajax({
-						url: 'lib/na_site_config.php',
-						type: 'POST',
-						data: {
-							mode: mode,
-							val : val
-						},
-						success: function(data){
-							if (data.message == "success"){
-								alert("Successfully Changed!");
-								location.reload();
-							}else{
-								alert("Some Error Occured");
-							}
-						}
-					});
-				});
-			});
-			</script>
-			<?php include('includes/footer.php'); ?>
+       			<?php include('includes/footer.php'); ?>
