@@ -3,6 +3,9 @@ include('includes/head.php');
 if(empty($_SESSION['loggedIN']) && ($_SESSION['role'] != 3 || empty($_SESSION['role']))){
 	echo '<script> window.location.href= "index.php"; </script>';
 }
+
+
+
 ?>
 <body class="nav-md">
 	<div class="container body">
@@ -11,6 +14,28 @@ if(empty($_SESSION['loggedIN']) && ($_SESSION['role'] != 3 || empty($_SESSION['r
 			<?php include('includes/topbar.php'); ?>
 			<!-- page content -->
 			<div class="right_col" role="main">
+									<div class="">
+						<?php
+						if($_GET['msg'] == "suc"){
+							?>
+							<div class="alert alert-success alert-dismissible fade in msg" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+								</button>
+								<strong>Success!</strong> Successfully Updated.
+							</div>
+							<?php
+						}
+						if($_GET['msg'] == "fail"){
+							?>
+							<div class="alert alert-danger alert-dismissible fade in msg" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+								</button>
+								<strong>Failed!</strong> Some Error Occured. Please Try Again!
+							</div>
+							<?php
+						}
+						?>
+		
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
@@ -64,6 +89,7 @@ if(empty($_SESSION['loggedIN']) && ($_SESSION['role'] != 3 || empty($_SESSION['r
 											</div>
 										</div>
 									</form>
+									
 								</div>
 							</div>
 						</div>

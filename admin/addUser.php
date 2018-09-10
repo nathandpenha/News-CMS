@@ -60,15 +60,16 @@ if(isset($_POST['submit']))
 	
 	if($stmt->execute())
 	{
-		echo "user added";
+		echo "<script> location.href= 'addUser.php?&msg=suc'; </script>";
 	}else
 	{
-		echo "user add failed".mysqli_error($db);
+	echo "<script> location.href= 'addUser.php?&msg=fail'; </script>";
+		
 	}
 	
 	
 }else{
-	echo"Incorrect Captcha";
+	echo "<script> location.href= 'addUser.php?msg=fail'; </script>";
 		
 }
  }
@@ -80,6 +81,28 @@ if(isset($_POST['submit']))
 			<?php include('includes/topbar.php'); ?>
 			<!-- page content -->
 			<div class="right_col" role="main">
+							<div class="">
+						<?php
+						if($_GET['msg'] == "suc"){
+							?>
+							<div class="alert alert-success alert-dismissible fade in msg" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+								</button>
+								<strong>Success!</strong> Successfully Updated.
+							</div>
+							<?php
+						}
+						if($_GET['msg'] == "fail"){
+							?>
+							<div class="alert alert-danger alert-dismissible fade in msg" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+								</button>
+								<strong>Failed!</strong> Some Error Occured. Please Try Again!
+							</div>
+							<?php
+						}
+						?>
+		
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
@@ -105,23 +128,23 @@ if(isset($_POST['submit']))
 											<?php } ?>
 											<tr>
 												<td>First Name</td>
-												<td><input type="text" class="demoInputBox" name="firstName" value="<?php if(isset($_POST['firstName'])) echo $_POST['firstName']; ?>"></td>
+												<td><input type="text" class="form-control col-md-7 col-xs-12" name="firstName" value="<?php if(isset($_POST['firstName'])) echo $_POST['firstName']; ?>"></td>
 											</tr>
 											<tr>
 												<td>Last Name</td>
-												<td><input type="text" class="demoInputBox" name="lastName" value="<?php if(isset($_POST['lastName'])) echo $_POST['lastName']; ?>"></td>
+												<td><input type="text" class="form-control col-md-7 col-xs-12" name="lastName" value="<?php if(isset($_POST['lastName'])) echo $_POST['lastName']; ?>"></td>
 											</tr>
 											<tr>
 												<td>Email</td>
-												<td><input type="text" class="demoInputBox" name="email" value="<?php if(isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>"></td>
+												<td><input type="text" class="form-control col-md-7 col-xs-12" name="email" value="<?php if(isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>"></td>
 											</tr>
 											<tr>
 												<td>Password</td>
-												<td><input type="password" class="demoInputBox" name="password" value=""></td>
+												<td><input type="password" class="form-control col-md-7 col-xs-12" name="password" value=""></td>
 											</tr>
 											<tr>
 												<td>Confirm Password</td>
-												<td><input type="password" class="demoInputBox" name="confirm_password" value=""></td>
+												<td><input type="password" class="form-control col-md-7 col-xs-12" name="confirm_password" value=""></td>
 											</tr>
 											<tr>
 												<td>User Type<select name="admin">
@@ -137,7 +160,7 @@ if(isset($_POST['submit']))
 											<tr>
 												<td>Enter the text you see</td>
 												<td><img src="<?php echo $image_src;?>"></td>
-												<td><input type="text class="demoInputBox" name="captcha"  ></td>
+												<td><input type="text class="form-control col-md-7 col-xs-12" name="captcha"  ></td>
 											</tr>
 												<tr>	
 												<td>	<input type="submit" name="submit" value="Register" class="btnRegister"></td>

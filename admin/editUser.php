@@ -73,10 +73,7 @@ if(isset($_POST['submit']))
 		
 }
  }
-?>
-<?php
-	include('../includes/base.php');
-?>
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,7 +131,7 @@ if(isset($_POST['submit']))
 								
 								Edit Details for User <?php echo $selectedemail; ?>
 								
-									<form name="frmRegistration" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+									<form class="form-horizontal form-label-left" name="frmRegistration" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 										<table border="0" width="500" align="center" class="demo-table">
 											<?php if(!empty($success_message)) { ?>
 												<div class="success-message"><?php if(isset($success_message)) echo $success_message; ?></div>
@@ -144,24 +141,24 @@ if(isset($_POST['submit']))
 											<?php } ?>
 											<tr>
 												<td>First Name</td>
-												<td><input type="text" class="demoInputBox" name="firstName" value=""></td>
+												<td><input type="text" class="form-control col-md-7 col-xs-12" name="firstName" value="<?=$_SESSION['first_name'];?>"></td>
 											</tr>
 											<tr>
 												<td>Last Name</td>
-												<td><input type="text" class="demoInputBox" name="lastName" value=""></td>
+												<td><input type="text" class="form-control col-md-7 col-xs-12" name="lastName" value="<?=$_SESSION['last_name'];?>"></td>
 											</tr>
 											<tr>
 												<td>Email</td>
-												<td><input type="text" class="demoInputBox" name="email" value="<?php if(isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>"></td>
+												<td><input type="text" class="form-control col-md-7 col-xs-12" name="email" value="<?=$_SESSION['email'];?>"></td>
 											</tr>
 											
 											<tr>
 												<td>Password</td>
-												<td><input type="password" class="demoInputBox" name="password" value=""></td>
+												<td><input type="password" class="form-control col-md-7 col-xs-12" name="password" value=""></td>
 											</tr>
 											<tr>
 												<td>Confirm Password</td>
-												<td><input type="password" class="demoInputBox" name="confirm_password" value=""></td>
+												<td><input type="password" class="form-control col-md-7 col-xs-12" name="confirm_password" value=""></td>
 											</tr>
 											<tr>
 												<td>User Type<select name="admin">
@@ -177,7 +174,7 @@ if(isset($_POST['submit']))
 											<tr>
 												<td>Enter the text you see</td>
 												<td><img src="<?php echo $image_src;?>"></td>
-												<td><input type="text class="demoInputBox" name="captcha"  ></td>
+												<td><input type="text class="form-control col-md-7 col-xs-12" name="captcha"  ></td>
 											</tr>
 												<tr>	
 												<td>	<input type="submit" name="submit" value="Register" class="btnRegister"></td>
