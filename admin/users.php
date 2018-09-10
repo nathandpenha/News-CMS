@@ -16,7 +16,7 @@ if(empty($_SESSION['loggedIN']) && ($_SESSION['role'] != 3 || empty($_SESSION['r
 							<h3>All Users</h3>
 						</div>
 					</div>
-					<button class="btn btn-success pull-right" data-toggle="modal" data-target=".addUserModal"><i class="fa fa-plus"></i> Add New User</i></button>
+					<a href="addUser.php"><button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New User</i></button></a>
 					<div class="clearfix"></div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
