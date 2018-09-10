@@ -2,7 +2,7 @@
 require('../includes/base.php');
 include("./captcha/simple-php-captcha.php");
 echo $DB_PREFIX;
-$sql = "SELECT email from aka_users";
+$sql = "SELECT email from ".$DB_PREFIX."users";
 																
 																if($db->query($sql)){
 																	echo "done";
