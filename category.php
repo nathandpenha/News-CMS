@@ -8,9 +8,9 @@ $getName = $db->query("SELECT * FROM ".DB_PREFIX."categories where id =".$getID)
 $getData = $db->query("SELECT p.title as title, p.id as pid FROM ".DB_PREFIX."posts p, ".DB_PREFIX."categories c where p.post_type = 'published' and p.category = c.id and c.id = ".$getID);
 ?>
 <main role="main" class="container">
-	<h2 class="pb-3 mb-4 mt-4 border-bottom">
+	<h4 class="pb-3 mb-4 mt-4 border-bottom">
 		Posts Related to Categories : <?=$getName;?>
-	</h2>
+	</h4>
 	<div class="row">
 		<?php
 		if($getData->num_rows <= 0){
@@ -19,9 +19,9 @@ $getData = $db->query("SELECT p.title as title, p.id as pid FROM ".DB_PREFIX."po
 			while($row = $getData->fetch_assoc()){
 				?>
 				<div class="row col-md-12">
-					<h3 class="pb-3 mb-4 mt-4 border-bottom">
+					<p class="pb-3 mb-4 mt-4 border-bottom">
 						<a href="article.php?node=<?=$row['pid'];?>"><?=$row['title'];?></a>
-					</h3>
+					</p>
 				</div>
 				<?php
 			}

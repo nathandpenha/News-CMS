@@ -6,6 +6,7 @@ include("includes/header.php");
 </div>
 <main role="main" class="container">
 	<div class="row">
+
 		<?php
 		$query = "SELECT * FROM ".DB_PREFIX."posts where featured = 0 and post_type = 'published' ORDER BY `date_created` DESC LIMIT 0,10";
 		$posts = $db->query($query);
@@ -15,22 +16,25 @@ include("includes/header.php");
 				$author = $getAuthor->fetch_assoc();
 				?>
 				<div class="col-md-6 blog-main">
-					<div class="blog-post">
+					<div class="blog-post my-3">
 						<h4><a href="article.php?node=<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></h4>
 						<p class="blog-post-meta"><?php echo $row['date']; ?> by <?=$author['author'];?></p>
 						<?php $body = $row['body'];
-						echo substr($body,0,40)."...";
+						echo substr($body,0,160)."...";
 						?>
+						<br>
 						<a href="article.php?node=<?php echo $row['id']; ?>" class="btn btn-primary">Read More</a>
-					</div><!-- /.blog-post -->
+					</div>
 				</div>
 				<?php
 			}
 		}
 		?>
-	</div><!-- row ends -->
+
+	</div>	<!-- row ends -->
 </main><!-- /.blog-main -->
 </div><!-- container ends -->
+<br>
 <center><a href="#">Back to top</a></center>
 <br>
 <script src="js/index.js" charset="utf-8"></script>
