@@ -13,14 +13,18 @@ $getData = $db->query("SELECT p.title as title, p.id as pid FROM ".DB_PREFIX."po
 	</h2>
 	<div class="row">
 		<?php
-		while($row = $getData->fetch_assoc()){
-			?>
-			<div class="row col-md-12">
-				<h3 class="pb-3 mb-4 mt-4 border-bottom">
-					<a href="article.php?node=<?=$row['pid'];?>"><?=$row['title'];?></a>
-				</h3>
-			</div>
-			<?php
+		if($getData->num_rows <= 0){
+			echo "<h4 class='font-italic'> No Posts Associated With this Category";
+		}else{
+			while($row = $getData->fetch_assoc()){
+				?>
+				<div class="row col-md-12">
+					<h3 class="pb-3 mb-4 mt-4 border-bottom">
+						<a href="article.php?node=<?=$row['pid'];?>"><?=$row['title'];?></a>
+					</h3>
+				</div>
+				<?php
+			}
 		}
 		?>
 	</div><!-- row ends -->

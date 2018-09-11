@@ -61,6 +61,35 @@ if (isset($_POST['loginBtn'])) {
 </head>
 <body class="text-center">
 	<form class="form-signin" method="post">
+		<?php
+		if($_GET['msg'] == "acsuc"){
+			?>
+			<div class="alert alert-success alert-dismissible fade in" style="opacity: 1" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+				</button>
+				<strong>Success!</strong> Account Created. Please Login Now!
+			</div>
+			<?php
+		}
+		if($_GET['msg'] == "em"){
+			?>
+			<div class="alert alert-danger alert-dismissible fade in" style="opacity: 1" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+				</button>
+				<strong>Error!</strong> Bad Email !!
+			</div>
+			<?php
+		}
+		if($_GET['msg'] == "mis"){
+			?>
+			<div class="alert alert-danger alert-dismissible fade in" style="opacity: 1" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+				</button>
+				<strong>Error!</strong> Bad Password!!
+			</div>
+			<?php
+		}
+		?>
 		<img class="mb-4" src="img/NA.png" alt="" width="72" height="72">
 		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 		<label for="inputEmail" class="sr-only">Email address</label>
@@ -70,5 +99,7 @@ if (isset($_POST['loginBtn'])) {
 		<button class="btn btn-lg btn-primary btn-block" name="loginBtn" type="submit">Sign in</button>
 		<p class="mt-5 mb-3 text-muted">&copy; SICSR </p>
 	</form>
+	<script src="js/bootstrap.js" charset="utf-8"></script>
+	<script src="js/jquery.js" charset="utf-8"></script>
 </body>
 </html>

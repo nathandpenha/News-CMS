@@ -1,5 +1,5 @@
 <?php
-$getArchives = $db->query("SELECT DISTINCT(monthname(date_created)) mnt, YEAR(date_created) yr FROM ".DB_PREFIX."posts GROUP by monthname(date_created), year(date_created)");
+$getArchives = $db->query("SELECT DISTINCT(monthname(date_created)) mnt, YEAR(date_created) yr FROM ".DB_PREFIX."posts GROUP by monthname(date_created), year(date_created) LIMIT 0,10");
 $getLatest = $db->query("SELECT * from ".DB_PREFIX."posts where post_type = 'published' and id != ".$getID." order by date_created desc limit 0,5");
 ?>
 <aside class="col-md-4 blog-sidebar">

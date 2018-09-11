@@ -4,18 +4,23 @@
 			<?=$siteDescription;?>
 		</div>
 		<div class="col-md-4">
-			Connect with us
+			Archives
+			<?php
+			$getArchives = $db->query("SELECT DISTINCT(monthname(date_created)) mnt, YEAR(date_created) yr FROM ".DB_PREFIX."posts GROUP by monthname(date_created), year(date_created) LIMIT 0,3");
+			?>
 			<ol class="list-unstyled">
-				<li><a href="#">GitHub</a></li>
-				<li><a href="#">Twitter</a></li>
-				<li><a href="#">Facebook</a></li>
+				<?php
+				while($archive = $getArchives->fetch_assoc()){
+					echo '<li><a href="archive.php?month='.$archive['mnt'].'&year='.$archive['yr'].'">'.($archive['mnt'].' '.$archive['yr']).'</a></li>';
+				}
+				?>
 			</ol>
 		</div>
 		<div class="col-md-4">
 			<?php
 			if($_SESSION['role'] > 1){
 				?>
-				<a href="admin/login.php">Panel</a>
+				<a href="admin/login.php">Admin Panel</a>
 				<?php
 			}
 			?>

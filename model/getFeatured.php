@@ -6,8 +6,6 @@ include '../includes/base.php';
 
 global $db;
 
-
-
 $query = "SELECT * FROM ".DB_PREFIX."posts where `featured` = 1 and `post_type` = 'published' ORDER BY `date_created` DESC LIMIT 0,3";
 
 $featured = $db->query($query);
