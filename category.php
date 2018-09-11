@@ -15,9 +15,11 @@ $getData = $db->query("SELECT p.title as title, p.id as pid FROM ".DB_PREFIX."po
 		<?php
 		while($row = $getData->fetch_assoc()){
 			?>
-			<h3 class="pb-3 mb-4 mt-4 border-bottom">
-				<a href="article.php?node=<?=$row['pid'];?>"><?=$row['title'];?></a>
-			</h3>
+			<div class="row col-md-12">
+				<h3 class="pb-3 mb-4 mt-4 border-bottom">
+					<a href="article.php?node=<?=$row['pid'];?>"><?=$row['title'];?></a>
+				</h3>
+			</div>
 			<?php
 		}
 		?>
