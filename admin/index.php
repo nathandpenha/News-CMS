@@ -79,6 +79,7 @@ $getRecentComment = $db->query("SELECT * FROM ".DB_PREFIX."comments order by dat
 								</div>
 								<div class="x_content">
 									<h2>Post </h2>
+									<?php if(!empty($getRecentPost)) { ?>
 									<h4> <?=$getRecentPost['title'];?>
 										&nbsp; &nbsp; &nbsp;<small> <?=date('F d, Y', strtotime($getRecentPost['date_created']));?></small>
 									</h4>
@@ -87,10 +88,15 @@ $getRecentComment = $db->query("SELECT * FROM ".DB_PREFIX."comments order by dat
 								<div class="clearfix"></div>
 								<hr>
 								<div class="clearfix"></div>
+							<?php } else { echo "<p>No Posts </p>";} ?>
 								<h2> Comments
 									&nbsp; &nbsp; &nbsp;<small> <?=date('F d, Y', strtotime($getRecentComment['date_created']));?></small>
 								</h2>
+								<?php if(!empty($getRecentComment)){ ?>
 								<p><?=$getRecentComment['message'];?></p>
+								<?php }else{
+									echo "<p> No Comments </p>";
+								} ?>
 							</div>
 						</div>
 					</div>

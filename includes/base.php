@@ -12,8 +12,8 @@
 	$userAccess = $db->query("SELECT meta_value FROM ".DB_PREFIX."site_meta WHERE `meta_name` = 'UserAccount'")->fetch_assoc()['meta_value'];
 	if ($_SERVER['REQUEST_URI'] == "/admin/"){
 		if($_SESSION['loggedIN'] != 1){
-			header('Location: ../admin/index.php');
-		}else{
 			header('Location: ../admin/login.php');
+		}else{
+			header('Location: ../admin/index.php');
 		}
 	}

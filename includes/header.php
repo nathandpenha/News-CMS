@@ -35,6 +35,8 @@ $categories = $db->query($query);
 				<?php }else{ ?>
 					<div class="col-4">
 						<?="Welcome, ".$_SESSION['first_name']." ".$_SESSION['last_name'];?>
+						<br>
+						<small><a style="color:black;" href="/admin/login.php">Admin </a></small>
 					</div>
 					<div class="col-4 text-center">
 				<?php } ?>

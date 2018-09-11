@@ -20,7 +20,7 @@
 			<?php
 			if($_SESSION['role'] > 1){
 				?>
-				<a href="admin/login.php">Admin Panel</a>
+				<a href="admin/index.php">Admin Panel</a>
 				<?php
 			}
 			?>

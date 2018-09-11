@@ -14,6 +14,17 @@
 		<div class="col-md-12">
 			<div class="container">
 				<div class="form-box align-items-center">
+					<?php
+					if($_GET['suc'] == "install"){
+						?>
+						<div class="alert alert-success alert-dismissible fade in msg" style="opacity:1;" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+							</button>
+							<strong>Success!</strong> Database Installed !
+						</div>
+						<?php
+					}
+					?>
 					<img src="img/NA.png" class="logo">
 					<hr>
 					<?php
@@ -105,5 +116,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="js/bootstrap.js" charset="utf-8"></script>
+	<script src="js/jquery.js" charset="utf-8"></script>
 </body>
 </html>

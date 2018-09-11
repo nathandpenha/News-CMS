@@ -8,6 +8,9 @@ $getYear = $_GET['year'];
 $getData = $db->query("SELECT * from ".DB_PREFIX."posts where monthname(date_created) = '".$getMonth."' and year(date_created) = ".$getYear);
 ?>
 <main role="main" class="container">
+	<h4 class="pb-3 mb-4 mt-4 border-bottom">
+		Articles | <?=($_GET['month'].' '.$_GET['year']);?>
+	</h4>
 	<div class="row">
 		<?php
 		if($getData->num_rows > 0) {
@@ -23,7 +26,7 @@ $getData = $db->query("SELECT * from ".DB_PREFIX."posts where monthname(date_cre
 				<?php
 			}
 		}else{
-			echo "No Post in this Period";
+			echo "No Articles in this Period";
 		}
 		?>
 	</div><!-- row ends -->

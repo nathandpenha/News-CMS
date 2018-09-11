@@ -1,6 +1,6 @@
 <?php
 include('../includes/base.php');
-if($_SESSION['loggedIN'] == 1 && $_SESSION['role'] != 1){
+if($_SESSION['loggedIN'] == 1 && $_SESSION['role'] > 1){
 	echo '<script> window.location.href = "index.php"; </script>';
 }
 if (isset($_POST['loginBtn'])) {
