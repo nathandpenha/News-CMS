@@ -4,7 +4,7 @@ if (file_exists("includes/base.php")){
 }else{
 	header('Location: ../na-install.php');
 }
-$query = "Select * from ".DB_PREFIX."categories";
+$query = "Select * from ".DB_PREFIX."categories limit 0,8";
 $categories = $db->query($query);
 ?>
 <!DOCTYPE html>
@@ -53,12 +53,12 @@ $categories = $db->query($query);
 				<div class="col-4 d-flex justify-content-end align-items-center">
 					<?php
 					$checkOpen = $db->query("SELECT meta_value from ".DB_PREFIX."site_meta where meta_name = 'UserAccount' ")->fetch_assoc()['meta_value'];
-					if($checkOpen == "open"){
-						?>
-						<a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
-						<?php
-					}
 					if(empty($_SESSION['loggedIN']) || $_SESSION['loggedIN'] == null){
+						if($checkOpen == "Open"){
+							?>
+							<a class="btn btn-sm btn-outline-secondary mr-3" href="signup.php">Sign up</a>
+							<?php
+						}
 						?>
 						<a class="btn btn-sm btn-outline-secondary" href="login.php">Log In</a>
 					<?php }else{
