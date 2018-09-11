@@ -73,7 +73,7 @@ $categories = $db->query($query);
 				<?php
 				if($categories->num_rows>0) {
 					while($row=$categories->fetch_assoc()){
-						echo "<a class='p-2 text-muted' href='index.php?category=$row[id]'>$row[category_name]</a>";
+						echo "<a class='p-2 text-muted' href='category.php?node=$row[id]'>$row[category_name]</a>";
 					}
 				}
 				?>

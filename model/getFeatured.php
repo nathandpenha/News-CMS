@@ -22,6 +22,7 @@ while($row = $featured->fetch_assoc()){
 	$data['body'] = $row['body'];
 	$data['id'] = $row['id'];
 	$data['category_name'] = $category['category_name'];
+	$data['category'] = $row['category'];
 	$ret[] = $data;
 }
 

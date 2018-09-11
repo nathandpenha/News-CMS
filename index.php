@@ -17,7 +17,7 @@ include("includes/header.php");
 				<div class="col-md-6 blog-main">
 					<div class="blog-post">
 						<h4><a href="article.php?node=<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></h4>
-						<p class="blog-post-meta"><?php echo $row['date']; ?> by <a href="user.php?id=<?=$author['id'];?>"><?=$author['author'];?></a></p>
+						<p class="blog-post-meta"><?php echo $row['date']; ?> by <?=$author['author'];?></p>
 						<?php $body = $row['body'];
 						echo substr($body,0,40)."...";
 						?>

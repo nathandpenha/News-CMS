@@ -4,12 +4,12 @@ if(empty($_GET['node'])){
 	header('Location: index.php');
 }
 $getID = $_GET['node'];
-$getName = $db->query("SELECT tag_name from ".DB_PREFIX."tags where id =".$getID)->fetch_assoc()['tag_name'];
-$getData = $db->query("select  p.id as pid, p.title as title from ".DB_PREFIX."post_tags tp, ".DB_PREFIX."tags t, ".DB_PREFIX."posts p where p.id = tp.post_id and tp.tag_id = t.id and t.id = ".$getID);
+$getName = $db->query("SELECT * FROM ".DB_PREFIX."categories where id =".$getID)->fetch_assoc()['category_name'];
+$getData = $db->query("SELECT p.title as title, p.id as pid FROM ".DB_PREFIX."posts p, ".DB_PREFIX."categories c where p.post_type = 'published' and p.category = c.id and c.id = ".$getID);
 ?>
 <main role="main" class="container">
 	<h2 class="pb-3 mb-4 mt-4 border-bottom">
-		Posts Related to Tag : <?=$getName;?>
+		Posts Related to Categories : <?=$getName;?>
 	</h2>
 	<div class="row">
 		<?php
