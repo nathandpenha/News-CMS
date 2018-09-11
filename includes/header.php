@@ -4,7 +4,7 @@ if (file_exists("includes/base.php")){
 }else{
 	header('Location: ../na-install.php');
 }
-$query = "Select * from ".DB_PREFIX."categories limit 0,8";
+$query = "Select * from ".DB_PREFIX."categories order by id desc limit 0,8";
 $categories = $db->query($query);
 ?>
 <!DOCTYPE html>
